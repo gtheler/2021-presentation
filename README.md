@@ -12,7 +12,7 @@ colorlinks: true
 sansfont: Carlito
 monofont: DejaVuSansMono
 header-includes: \include{syntax.tex}
-handout: true
+handout: false
 ...
 
 ## Background 1/2
@@ -53,7 +53,9 @@ handout: true
 \newcommand{\bad}{\textcolor{red}{$\times$}}
 \newcommand{\neutral}{\textcolor{DarkBlue}{$\sim$}}
 
+\newcommand{\ruleof}[1]{\hfill{\footnotesize (Rule of #1)}}
 
+   
 :::::::::::::: {.columns}
 ::: {.column width="25%"}
 \centering \onslide<1->{\includegraphics[height=2cm]{word}}
@@ -215,7 +217,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
    * Elasticity (FEM)
    * Modal (FEM)
    * Neutron transport and diffusion (FEM/FVM)
- * Template for more formulations
+ * Templates for more formulations
    * Electromagnetism
    * Chemical diffusion/reaction
    * Fluid mechanics?
@@ -227,7 +229,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 ## 
 
 :::::::::::::: {.columns}
-::: {.column width="50%"}
+:::::: {.column width="50%"}
 
 #### 1.2. Scope
 
@@ -236,27 +238,95 @@ A fictitious & imaginary Request for Quotation for a computational tool:
    - An API for high-level language (Python, Julia, etc.)
  * There is no need to _include_ a GUI
    - The tool should _allow_ a GUI to be used
-     - desktop
-     - web
-     - mobile
- * The discretization of the domain can be an input
+     - Desktop
+     - Web
+     - Mobile
+ * The mesh can be an input
    - As long as its creation meets the SRS
  * Include documentation about how a...
    - Pre-processor should create inputs
    - Post-processor should read outputs
 
-:::
+::::::
 
-::: {.column width="50%"}
+. . .
+
+:::::: {.column width="50%"}
 
 ### FeenoX {.example}
 
- * xxx
+ * No GUI, console binary executable
+ * "Transfer-function"-like between I/O
+     * No need to recompile the binary
 
+   ![](transfer.png)\ 
+   
+ * English-like syntactic-sugared input files^[See "Ancient History" appendix.]
+    - nouns are definitions
+    - verbs are instructions
+ * Python & Julia API: TODO
+   - But already taken into account in the design & implementation
+ * Separate mesher
+   - Gmsh (GPLv2, meets SRS)
+   - Anything that writes `.msh`
+ * Possibility to use GUI
+   - CAEplex <https://www.caeplex.com> 
+
+::::::
+::::::::::::::
+
+
+## Lorenz’ system
+
+:::::::::::::: {.columns}
+::: {.column width="45%"}
+
+Solve
+$$
+\begin{cases}
+\dot{x} &= \sigma \cdot (y - x) \\
+\dot{y} &= x \cdot (r - z) - y \\
+\dot{z} &= x \cdot y - b \cdot z
+\end{cases}
+$$
+
+\noindent for $0 < t < 40$ with initial conditions
+
+$$
+\begin{cases}
+x(0) &= -11\\
+y(0) &= -16\\
+z(0) &= 22.5\\
+\end{cases}
+$$
+
+\noindent and $\sigma=10$, $r=28$ and $b=8/3$.
+:::
+
+::: {.column width="55%"}
+```{.feenox include="lorenz/lorenz.fee"}
+```
+
+```terminal
+$ feenox lorenz.fee
+0.000000e+00    -1.100000e+01   -1.600000e+01   2.250000e+01
+2.384186e-07    -1.100001e+01   -1.600001e+01   2.250003e+01
+4.768372e-07    -1.100002e+01   -1.600002e+01   2.250006e+01
+[...]
+3.997567e+01    4.442995e+00    3.764391e+00    2.347301e+01
+3.998290e+01    4.399950e+00    3.886609e+00    2.314602e+01
+3.999012e+01    4.368713e+00    4.016860e+00    2.282821e+01
+$
+```
+
+(Rule of composition)
 
 :::
 ::::::::::::::
 
+## 
+
+\centering ![](lorenz.svg)
 
  
  
@@ -289,8 +359,31 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 
 ### FeenoX {.example}
 
- * xxx
+ * Third attempt (after v1 & v2)^[See "Ancient History" appendix.]
+ * UNIX philosophy: "do one thing well"
+   - rule of separation: no GUI
+   - rule of composition: Gnuplot, Gmsh, ...
+   - ...
+ * Dependencies available in APT
+ 
+    ```terminal
+    apt-get install git gcc make automake autoconf
+    apt-get install libgsl-dev
+    apt-get install lib-sundials-dev petsc-dev slepc-dev
+    ```
 
+ * Sources on Github
+ 
+    ```terminal
+    git clone https://github.com/seamplex/feenox
+    ```
+    
+    
+ * Autotools & friends for compilation
+ 
+    ```terminal
+    ./autogen.sh; ./configure; make
+    ```
 
 :::
 ::::::::::::::
@@ -317,11 +410,109 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
- * xxx
 
+ * Tested in
+   - Raspberry Pi
+   - Laptop (GNU/Linux & Windows 10)
+   - Macbook
+   - Desktop PC
+   - Bare-metal servers
+   - AWS/DigitalOcean/Contabo
 
+ * Parallelization: TO-DO
+   - Gmsh partitioning with METIS
+   - PETSc/SLEPc with MPI
+
+ * Mobile: TO-DO
 :::
 ::::::::::::::
+
+
+
+
+## How to solve a maze without AI 1/3
+
+\renewcommand{\vec}{\mathbf}
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering ![](maze1.png){height=8cm}
+:::
+::: {.column width="50%"}
+
+ 1. Go to <http://www.mazegenerator.net/>
+ 2. Create a maze
+ 3. Download it in SVG
+ 4. Open it with Inkscape
+    - Convert it to path
+    - Export to DXF
+:::
+::::::::::::::
+
+
+## How to solve a maze without AI 2/3
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+ 5. Convert the DXF to Gmsh's `.geo`
+    
+    ```terminal
+    dxf2svg maze.dxf
+    ```
+    
+ 6. Open the `.geo` in Gmsh
+    - Add a surface
+    - Set physical curves for "start" and "end"
+    - Mesh it
+ 
+    ```terminal
+    gmsh -2 maze.geo
+    ```
+ 
+:::
+
+. . .
+
+::: {.column width="50%"}
+![](maze2.png){width=6cm}\ 
+:::
+::::::::::::::
+
+
+## How to solve a maze without AI 3/3
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+ 7. Solve $\nabla^2 \phi = 0$ with BCs
+    - $\phi=0$ at "start",
+    - $\phi=1$ at "end",
+    - $\nabla \phi \cdot \hat{\vec{n}} = 0$ everywhere else
+ 
+   ```{.feenox include="maze/maze.fee"}
+   ```
+   
+   ```terminal
+   $ feenox maze.fee
+   $
+   ```
+ 
+<!--    \ruleof{silence} -->
+ 
+ 8. Go to start and follow the gradient $\nabla \phi$!
+
+:::
+
+. . .
+
+::: {.column width="50%"}
+![](maze3.png){width=6cm}\ 
+:::
+::::::::::::::
+
+ 
+
+
+
 
 
 ## 
@@ -567,14 +758,8 @@ A fictitious & imaginary Request for Quotation for a computational tool:
        * SUNDIALS
        * GSL
     * outer loops (i.e. parametric, optimization) with third-party tools
- 
- 
- 3. Transfer function
-    * input/output files
-    * no need to recompile
- 
+  
  4. English-like syntactic-sugared plain-text input files
-    * nouns are definitions, verbs are instructions
     * simple problems ought to need simple inputs
     * similar problems ought to need similar inputs
     * robust (`thermal` or `heat`)
@@ -654,50 +839,6 @@ $
 ::::::::::::::
 
 
-## Lorenz’ system
-
-:::::::::::::: {.columns}
-::: {.column width="45%"}
-
-Solve
-$$
-\begin{cases}
-\dot{x} &= \sigma \cdot (y - x) \\
-\dot{y} &= x \cdot (r - z) - y \\
-\dot{z} &= x \cdot y - b \cdot z
-\end{cases}
-$$
-
-\noindent for $0 < t < 40$ with initial conditions
-
-$$
-\begin{cases}
-x(0) &= -11\\
-y(0) &= -16\\
-z(0) &= 22.5\\
-\end{cases}
-$$
-
-\noindent and $\sigma=10$, $r=28$ and $b=8/3$.
-:::
-
-::: {.column width="55%"}
-```{.feenox include="lorenz/lorenz.fee"}
-```
-
-```terminal
-$ feenox lorenz.fee
-aasdfas df asdf
-[...]
-$
-```
-
-:::
-::::::::::::::
-
-## 
-
-\centering ![](lorenz.svg)
 
 ## Point kinetics as ODEs
 
@@ -744,33 +885,7 @@ $$
 
 ## Point kinetics as reactivity-dependent-frequency lags
 
-## How to solve a maze without AI
 
-\renewcommand{\vec}{\mathbf}
-
-\centering ![](maze1.png){height=8cm}
-
-
-## 
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-![](maze2.png){width=6cm}\ 
-
-Mesh it, set $\phi=0$ at start, $\phi=1$ at end, $\nabla \phi \cdot \hat{\vec{n}} = 0$ otherwise and solve $\nabla^2 \phi = 0$
-:::
-
-. . .
-
-::: {.column width="50%"}
-
-![](maze3.png){width=6cm}\ 
-
-Go to start and follow the gradient $\nabla \phi$!
-:::
-::::::::::::::
-
- 
 
 ## Ancient history
 
