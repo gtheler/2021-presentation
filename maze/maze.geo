@@ -2624,5 +2624,5 @@ Curve Loop(1) = {521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533
 Plane Surface(1) = {1};
 
 Physical Surface("bulk") = {1};
-Physical Curve("in") = {782, 783};
-Physical Curve("out") = {1305, 1304};
+Physical Curve("start") = {782, 783};
+Physical Curve("end") = {1305, 1304};

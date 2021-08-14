@@ -1,0 +1,27 @@
+INCLUDE parameters.fee    # kinetic parameters
+
+# our phase space is flux, precursors and reactivity
+PHASE_SPACE phi c rho
+
+end_time = 100
+# we need a tighter error to handle small reactivities
+rel_error = 1e-7   
+
+# steady-state initial conditions
+rho_0 = 0   # no reactivity
+phi_0 = 1   # full power
+c_0[i] = phi_0 * beta[i]/(Lambda*lambda[i])
+
+FUNCTION react(t) DATA {   0    0   # in pcm
+                           5    0
+                           10  10
+                           30  10
+                           35   0
+                           100  0   }
+
+# reactor point kinetics equations
+rho = 1e-5*react(t)   # convert pcm to absolute
+phi_dot = (rho-Beta)/Lambda * phi + vecdot(lambda, c)
+c_dot[i] = beta[i]/Lambda * phi - lambda[i]*c[i]
+
+PRINT t phi rho

@@ -1,0 +1,22 @@
+INCLUDE parameters.fee    # kinetic parameters
+
+# our phase space is flux, precursors and reactivity
+PHASE_SPACE phi c rho
+
+end_time = 100
+rel_error = 1e-7
+
+# initial conditions for the DAE system
+rho_0 = 0
+phi_0 = 1
+c_0[i] = phi_0 * beta(i)/(Lambda*lambda(i))
+
+FUNCTION flux(t) FILE flux.dat
+
+# DAE system (reactor point kinetics)
+phi = flux(t)
+phi_dot = (rho-Beta)/Lambda * phi + vecdot(lambda, c)
+c_dot[i] = beta[i]/Lambda * phi - lambda[i]*c[i]
+
+# write the result to the standard output
+PRINT t phi rho

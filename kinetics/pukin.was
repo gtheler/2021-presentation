@@ -1,0 +1,37 @@
+INCLUDE parameters.was
+
+end_time = 60
+dt = 0.05
+
+# prescribed reactivity
+FUNCTION react(t) INTERPOLATION akima DATA {
+0       0
+0.5     0
+1       0
+2       1e-5
+3       3e-5
+4       7e-5
+5       9e-5
+6       10e-5
+7       10e-5
+8       10e-5
+10      10e-5
+20      10e-5
+30      3e-5
+40      0
+50      0
+60      0
+}
+
+
+VECTOR cbez SIZE nprec
+
+# condiciones iniciales
+pkbez_0 = 1
+cbez_0(i) = pkbez_0
+
+cbez(i) = lag(pkbez, 1/lambda(i))
+pkbez = lag(vecdot(beta, cbez)/(Beta - react(t)), Lambda / (Beta - react(t)))
+
+PRINT t pkbez 1e5*react(t)
+
