@@ -53,8 +53,6 @@ handout: false
 \newcommand{\bad}{\textcolor{red}{$\times$}}
 \newcommand{\neutral}{\textcolor{DarkBlue}{$\sim$}}
 
-\newcommand{\ruleof}[1]{\hfill{\footnotesize (Rule of #1)}}
-
    
 :::::::::::::: {.columns}
 ::: {.column width="25%"}
@@ -224,8 +222,9 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 
 ::::::
 ::::::::::::::
- 
- 
+
+
+
 ## 
 
 :::::::::::::: {.columns}
@@ -246,7 +245,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * Include documentation about how a...
    - Pre-processor should create inputs
    - Post-processor should read outputs
-
+   
 ::::::
 
 . . .
@@ -261,7 +260,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 
    ![](transfer.png)\ 
    
- * English-like syntactic-sugared input files^[See "Ancient History" appendix.]
+ * English-like syntactic-sugared input files
     - nouns are definitions
     - verbs are instructions
  * Python & Julia API: TODO
@@ -274,6 +273,16 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 
 ::::::
 ::::::::::::::
+ 
+
+
+
+
+
+
+
+
+
 
 
 ## Lorenz’ system
@@ -355,11 +364,13 @@ $
 
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
 
- * Third attempt (after v1 & v2)^[See "Ancient History" appendix.]
+ * Third attempt (after v1 & v2)
  * UNIX philosophy: "do one thing well"
    - rule of separation: no GUI
    - rule of composition: Gnuplot, Gmsh, ...
@@ -442,10 +453,18 @@ $
 
  1. Go to <http://www.mazegenerator.net/>
  2. Create a maze
- 3. Download it in SVG
- 4. Open it with Inkscape
-    - Convert it to path
-    - Export to DXF
+ 3. Download it in PNG
+ 4. Perform some conversions
+     - PNG $\rightarrow$ GEO
+ 
+    ```terminal
+    wget http://www.mazegenerator.net/static/orthogonal_maze_with_20_by_20_cells.png
+    convert orthogonal_maze_with_20_by_20_cells.png -negate maze.png
+    potrace maze.pnm --alphamax 0  --opttolerance 0 -b svg -o maze.svg
+    ./svg2dxf maze.svg maze.dxf
+    ./dxf2geo maze.dxf 0.1
+    ```
+ 
 :::
 ::::::::::::::
 
@@ -454,24 +473,20 @@ $
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
- 5. Convert the DXF to Gmsh's `.geo`
-    
-    ```terminal
-    dxf2svg maze.dxf
-    ```
-    
- 6. Open the `.geo` in Gmsh
+ 5. Open it with Gmsh 
+ 
+    ![](gmsh-maze.png)\ 
+ 
     - Add a surface
     - Set physical curves for "start" and "end"
-    - Mesh it
+    
+ 6. Mesh it
  
     ```terminal
     gmsh -2 maze.geo
     ```
  
 :::
-
-. . .
 
 ::: {.column width="50%"}
 ![](maze2.png){width=6cm}\ 
@@ -480,6 +495,9 @@ $
 
 
 ## How to solve a maze without AI 3/3
+
+\newcommand{\ruleof}[1]{\vspace{-0.25cm}\hfill \footnotesize \textcolor{cyan}{(Rule of {#1})}}
+
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -496,7 +514,7 @@ $
    $
    ```
  
-<!--    \ruleof{silence} -->
+   \ruleof{silence}
  
  8. Go to start and follow the gradient $\nabla \phi$!
 
@@ -511,7 +529,9 @@ $
 
  
 
+## The life on an influencer...
 
+\centering ![](maze-linkedin.png)
 
 
 

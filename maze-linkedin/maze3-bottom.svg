@@ -8,11 +8,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
-   sodipodi:docname="maze1-bottom.svg"
+   sodipodi:docname="maze3-bottom.svg"
    id="svg9792"
    version="1.1"
-   viewBox="0 0 658.05743 67.5"
-   height="67.5pt"
+   viewBox="0 0 658.05743 38.519344"
+   height="38.519344pt"
    width="658.05743pt">
   <metadata
      id="metadata9796">
@@ -43,9 +43,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.55569948"
-     inkscape:cx="402.29101"
-     inkscape:cy="-14.846971"
+     inkscape:zoom="17.782384"
+     inkscape:cx="879.77303"
+     inkscape:cy="59.683433"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -54,7 +54,7 @@
     <inkscape:grid
        type="xygrid"
        id="grid10751"
-       originx="0.056382107"
+       originx="0.056382106"
        originy="-691.19366" />
   </sodipodi:namedview>
   <title
@@ -82,19 +82,4 @@ CreationDate: Mon Aug  9 09:04:01 2021
          id="path11071" />
     </marker>
   </defs>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:10.3748px;font-family:sans-serif;-inkscape-font-specification:sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:8.67856"
-     x="312.8815"
-     y="55.968567"
-     id="text11067"><tspan
-       sodipodi:role="line"
-       id="tspan11065"
-       x="312.8815"
-       y="55.968567"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;stroke:none;stroke-width:8.67856">end</tspan></text>
-  <path
-     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.991071;marker-end:url(#marker11073)"
-     d="M 311.868,3.7419854 V 30.689345"
-     id="path11069" />
 </svg>
