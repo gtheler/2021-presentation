@@ -328,7 +328,6 @@ $ feenox lorenz.fee
 $
 ```
 
-(Rule of composition)
 
 :::
 ::::::::::::::
@@ -451,18 +450,24 @@ $
 :::
 ::: {.column width="50%"}
 
+![](homer.png){width=48%}
+![](homer2.png){width=48%}
+
+
  1. Go to <http://www.mazegenerator.net/>
  2. Create a maze
  3. Download it in PNG
  4. Perform some conversions
-     - PNG $\rightarrow$ GEO
+     - PNG $\rightarrow$ PNM $\rightarrow$ SVG $\rightarrow$ DXF $\rightarrow$ GEO
  
     ```terminal
-    wget http://www.mazegenerator.net/static/orthogonal_maze_with_20_by_20_cells.png
-    convert orthogonal_maze_with_20_by_20_cells.png -negate maze.png
-    potrace maze.pnm --alphamax 0  --opttolerance 0 -b svg -o maze.svg
-    ./svg2dxf maze.svg maze.dxf
-    ./dxf2geo maze.dxf 0.1
+    $ wget http://www.mazegenerator.net/static/orthogonal_maze_with_20_by_20_cells.png
+    $ convert orthogonal_maze_with_20_by_20_cells.png \ 
+      -negate maze.png
+    $ potrace maze.pnm --alphamax 0  --opttolerance 0 \ 
+      -b svg -o maze.svg
+    $ ./svg2dxf maze.svg maze.dxf
+    $ ./dxf2geo maze.dxf 0.1
     ```
  
 :::
@@ -566,15 +571,77 @@ $
 
 ### FeenoX {.example}
 
- * xxx
+ * Compile from source
+   
+   ```terminal
+   sudo apt-get install ...
+   git clone ...
+   ./autogen.sh && ./configure && make
+   ```
+   
+ * Pre-compiled binaries
+ 
+   ```terminal
+   wget http://gmsh.info/bin/Linux/gmsh-${gmsh-version}-Linux64.tgz
+   wget https://seamplex.com/feenox/dist/linux/feenox-v${feenox-version}-linux-amd64.tar.gz
+   ```
+
+  * Execution examples following!
 
 
 :::
 ::::::::::::::
 
 
+## Direct execution: three ways of getting the first 25 Fibonacci numbers
+
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+```{.feenox include="math/fibo_formula.fee"}
+```
+
+```{.feenox include="math/fibo_vector.fee"}
+```
+
+```{.feenox include="math/fibo_iterative.fee"}
+```
+:::
+
+::: {.column width="40%"}
+```terminal
+$ feenox fibo_formula.fee | tee one
+1	1
+2	1
+3	2
+4	3
+5	5
+6	8
+7	13
+8	21
+9	34
+10	55
+11	89
+12	144
+13	233
+14	377
+15	610
+16	987
+17	1597
+18	2584
+19	4181
+20	6765
+$ feenox fibo_vector.fee > two
+$ feenox fibo_iterative.fee > three
+$ diff one two
+$ diff two three
+$
+```
+:::
+::::::::::::::
 
 
+
+## Parametric execution: shear locking in cantilevered beam
 
 
 
@@ -810,54 +877,6 @@ $
  9. Extensibility
     * use the existing PDE formulations as templates
     * build a community!
-
-## Three ways of getting the first 25 Fibonacci numbers
-
-:::::::::::::: {.columns}
-::: {.column width="70%"}
-```{.feenox include="math/fibo_vector.fee"}
-```
-
-```{.feenox include="math/fibo_formula.fee"}
-```
-
-```{.feenox include="math/fibo_iterative.fee"}
-```
-:::
-
-::: {.column width="30%"}
-```terminal
-$ feenox fibo_formula.fee
-1       1
-2       1
-3       2
-4       3
-5       5
-6       8
-7       13
-8       21
-9       34
-10      55
-11      89
-12      144
-13      233
-14      377
-15      610
-16      987
-17      1597
-18      2584
-19      4181
-20      6765
-21      10946
-22      17711
-23      28657
-24      46368
-25      75025
-$
-```
-:::
-::::::::::::::
-
 
 
 ## Point kinetics as ODEs
