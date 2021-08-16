@@ -269,7 +269,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
    - Gmsh (GPLv2, meets SRS)
    - Anything that writes `.msh`
  * Possibility to use GUI
-   - CAEplex <https://www.caeplex.com> 
+   - CAEplex <https://www.caeplex.com>
 
 ::::::
 ::::::::::::::
@@ -346,6 +346,9 @@ $
 
 ### 2. Architecture
 
+\newcommand{\ruleof}[1]{{\textcolor{cyan}{Rule of {#1}}}}
+\newcommand{\ruleofpar}[1]{\vspace{-0.25cm}\hfill{\footnotesize\textcolor{cyan}{(Rule of {#1})}}}
+
  * Should run on mainstream cloud servers
    - GNU/Linux
    - Multi-core Intel-compatible CPUs
@@ -371,9 +374,11 @@ $
 
  * Third attempt (after v1 & v2)
  * UNIX philosophy: "do one thing well"
-   - rule of separation: no GUI
-   - rule of composition: Gnuplot, Gmsh, ...
+   - \ruleof{separation}: no GUI
+   - \ruleof{composition}: Gnuplot, Gmsh, ...
    - ...
+ * Third-party math libraries
+   - GNU GSL, PETSc, SLEPc, SUNDIALS
  * Dependencies available in APT
  
     ```terminal
@@ -392,7 +397,7 @@ $
  * Autotools & friends for compilation
  
     ```terminal
-    ./autogen.sh; ./configure; make
+    ./autogen.sh && ./configure && make
     ```
 
 :::
@@ -501,7 +506,6 @@ $
 
 ## How to solve a maze without AI 3/3
 
-\newcommand{\ruleof}[1]{\vspace{-0.25cm}\hfill \footnotesize \textcolor{cyan}{(Rule of {#1})}}
 
 
 :::::::::::::: {.columns}
@@ -519,7 +523,7 @@ $
    $
    ```
  
-   \ruleof{silence}
+   \ruleofpar{silence}
  
  8. Go to start and follow the gradient $\nabla \phi$!
 
@@ -571,22 +575,33 @@ $
 
 ### FeenoX {.example}
 
- * Compile from source
+ * Compile optimized dependencies
    
    ```terminal
-   sudo apt-get install ...
-   git clone ...
-   ./autogen.sh && ./configure && make
+   $ cd $PETSC_DIR
+   $ ./configure --with-debug=0 COPTFLAGS="-Ofast"
+   $ make -j8
+   ```
+ 
+ * Configure FeenoX with particular flags
+   
+   ```terminal
+   $ git clone https://github.com/seamplex/feenox
+   $ cd feenox
+   $ ./autogen.sh
+   $ ./configure CC=clang CFLAGS=-Ofast
    ```
    
- * Pre-compiled binaries
+ * Pre-compiled binaries with standard optimization
  
    ```terminal
    wget http://gmsh.info/bin/Linux/gmsh-${gmsh-version}-Linux64.tgz
+   tar xvzf gmsh-${gmsh-version}-Linux64.tgz
    wget https://seamplex.com/feenox/dist/linux/feenox-v${feenox-version}-linux-amd64.tar.gz
+   tar xvzf feenox-v${feenox-version}-linux-amd64.tar.gz
    ```
 
-  * Execution examples following!
+  * Execution examples follow $\rightarrow$
 
 
 :::
@@ -643,12 +658,17 @@ $
 
 ## Parametric execution: shear locking in cantilevered beam
 
+## Optimization loop: finding the length of a tuning fork
+
+Python with Gmsh API
+
+single scalar back 
 
 
 ## 
 
 :::::::::::::: {.columns}
-::: {.column width="50%"}
+::: {.column width="47.5%"}
 
 #### 2.3. Efficiency
 
@@ -675,211 +695,38 @@ $
     
 :::
 
-::: {.column width="50%"}
+::: {.column width="52.5%"}
 
 ### FeenoX {.example}
 
- * xxx
-
-
-:::
-::::::::::::::
-
-
-
-
-
-
-## 
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-#### 2.6. Extensibility
-
- * xxx
- 
-#### 2.7. Interoperability
-
- * xxx
-    
-:::
-
-::: {.column width="50%"}
-
-### FeenoX {.example}
-
- * xxx
-
-
-:::
-::::::::::::::
-
-
-
-
-
-
-
-## 
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-### 3. Interfaces
-
-#### 3.1. Input
-
- * xxx
- 
-#### 3.2. Output
-
- * xxx
-    
-:::
-
-::: {.column width="50%"}
-
-### FeenoX {.example}
-
- * xxx
-
-
-:::
-::::::::::::::
-
-
-
-
-
-
-
-
-
-
-## 
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-### 4. Quality Assurance
-
-#### 4.1. Reproducibility and traceability
-
- * xxx
- 
-#### 4.2. Automated testing
-
- * xxx
-
-#### 4.3. Bug reporting and tracking
-
- * xxx
- 
-:::
-
-::: {.column width="50%"}
-
-### FeenoX {.example}
-
- * xxx
-
-
-:::
-::::::::::::::
-
-
-
-
-
-## 
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-#### 4.4. Verification
-
- * xxx
- 
-#### 4.5. Validation
-
- * xxx
-
-#### 4.6. Documentation
-
- * xxx
- 
-:::
-
-::: {.column width="50%"}
-
-### FeenoX {.example}
-
- * xxx
-
-
-:::
-::::::::::::::
-
-
-
-
-
-
-
-
-## Design
-
- 0. Third-attempt!
-    * see “ancient history” appendix for details
-
- 1. UNIX philosophy: do one thing well
-
-    * no GUI
-    * glue layer
-    * separate mesher
-       * Gmsh
-    * third-party mathematical libraries
-       * PETSc (LAPACK, MUMPS, HYPRE, MKL, ...)
-       * SLEPc
-       * SUNDIALS
-       * GSL
-    * outer loops (i.e. parametric, optimization) with third-party tools
-  
- 4. English-like syntactic-sugared plain-text input files
-    * simple problems ought to need simple inputs
-    * similar problems ought to need similar inputs
-    * robust (`thermal` or `heat`)
- 
- 5. Cloud
-    * unattended execution
-    * docker-friendly deployment
-       - git clone from Github
-       - source tarballs
-       - binary tarballs
-    * ability to report status
-    * parallelization through MPI
-    
- 
- 6. GUI-friendly
-    * specially web-based interfaces
-    * already powering [caeplex.com]<https:://www.caeplex.com>
-
- 7. Written in C (no C++ nor Fortran)
-    * C99
-    * uses Autotools
-    * tested with `gcc`, `clang` and `icc`
-    * no need for C++ nor Fortran compilers
+ * First make it work, then optimize
+ * Premature optimization is the root of all evil
+   - Optimization: TO-DO
+   - Parallelization: TO-DO
+   - Comparison: TO-DO
+ * Linear solvers
+   - Direct solver MUMPS
+     - Robust but not scalable
+   - GAMG-preconditioned KSP
+     - Near-nullspace improves convergence
+ * Scalable non-linear solvers (PETSc)
+ * Written in ANSI C99 (no C++ nor Fortran)
+    * Autotools & friends
+    * Tested with `gcc`, `clang` and `icc`
+    * No need for C++ nor Fortran compilers
     * Rust & Go, can't tell (yet)
+ * Flexibility follows $\rightarrow$
+    * Based on the CNA2 experience!
+::: 
+::::::::::::::
 
- 8. Python & Julia API
-    
- 9. Extensibility
-    * use the existing PDE formulations as templates
-    * build a community!
+## Flexibility I: one-dimensional thermal slabs
 
+## Flexibility II: two squares in thermal contact
 
-## Point kinetics as ODEs
+## Flexibility III: time-dependent BCs
+
+## Flexibility IV: point kinetics with pointwise reactivity
 
 :::::::::::::: {.columns}
 ::: {.column width="45%"}
@@ -916,6 +763,408 @@ $$
 ## 
 
 \centering ![](reactivity-from-table.pdf)
+
+## Flexibility V: inverse kinetics as DAEs
+
+## Flexibility VI: inverse kinetics as plain-old intregrals
+
+## Flexibility VII: point kinetics as first-order lags
+
+## Flexibility VIII: transient heat conduction with\ $k(T)$
+
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+#### 2.6. Extensibility
+
+ * Possibility to add more features
+   - More PDEs
+   - New material models (i.e. stress-strain)
+   - Other element types
+ * Clear licensing scheme for extensions
+ 
+#### 2.7. Interoperability
+
+ * Ability to exchange data with other tools following this SRS
+   - Pre and post processors
+   - Optimization tools
+   - Coupled multi-physics calculations
+    
+:::
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * Think for the future! \ruleof{XXX}
+   - GPLv3**+**: the '+' is for the future
+ * Nice-to-haves
+   - Lagrangian elements, DG, $h$-$p$ AMR, ...
+ * Other problems
+   - Each PDE has an independent directory
+   - "Virtual methods" as function pointers
+   - Use Laplace as a template
+ * Coupled calculations: TO-DO
+   - Wide experience from CNA2 (v2)
+   - Plain (RAM-disk) files
+   - Shared memory & semaphores
+   - MPI
+ * Interoperability
+   - Gnuplot, matplotlib, etc.
+   - Gmsh (+ Meshio), Paraview
+   - CAEplex
+   - PrePoMax, FreeCAD, ...: TO-DO
+   
+ EXTENSIBILITY
+  - transient kinetics pcamusso
+  - heat eze?
+  - misc, other problems rvignolo
+  - epellegrino, waspy
+   
+  - every feature is there becasue there was at least one need from an actual project
+  
+  - ejercicio fatiga 3 bars
+:::
+::::::::::::::
+
+
+
+
+## Laplace equation with Paraview as post-processor
+
+\ruleof{YYY} 
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+### 3. Interfaces
+
+ * Fully human-less execution
+   - Input files (1 or more)
+   - Output files (0 or more)
+ * Ability to remotely report status
+   - Progress
+   - Errors
+   
+#### 3.1. Input
+
+ * Problem fully defined in input files
+   - Ad-hoc syntax
+   - API for high-level languages
+   - Other files (data, meshes, scripts)
+ * Preferably ASCII (for DCVS)
+   - Avoid mixing problem and mesh data
+ * GUI not mandatory but possible
+   - Ok to have basic usage through GUI
+   - Advanced features through API
+
+:::
+
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * Symbios
+
+ * ASCII progress bars
+   - Build matrix
+   - Solve equations
+   - Gradient recovery
+ * Heartbeat
+
+ * Everything is an expression
+ * English self evident problem-like
+ * ASCII
+ * Syntactic sugared
+ * Robust
+ 
+ * Simple problem, simple input
+ * Similar problems, similar inputs
+ 
+ * Rule of least surprise
+   f(x) = x^2
+ * NAFEMS LE11:
+   - English
+   - problem-like
+   - expression
+   - simple
+ * Thermal slabs
+   - k(x,T)
+ * Convection as expressions
+ * Radiation
+ 
+
+ 
+:::
+::::::::::::::
+
+
+
+## CAEplex progress status on the cloud
+
+## NAFEMS LE10: English-like problem definition
+
+## NAFEMS LE11: everything is an expression
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+ 
+#### 3.2. Output
+
+ * Clean output expected
+ * Do not clutter the output with
+   - ASCII art
+   - Notices
+   - Explanations
+   - Page separators
+ * Output should interpreted by both
+   - A human
+   - A computer
+ * Open standards and well-documented formats should be preferred
+    
+:::
+
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * \ruleof{economy}
+ * silence
+ 
+ * 100% user-defined
+   - Pi
+   - sophomore
+ * NAFEMS LE10
+ * Transient 1D thermal Gmsh
+ * Alambre PDF experimetnal 101
+   - markdown table
+ * Tablas fatiga
+ * modal NAFEMS
+ * hdf5?
+
+ * double pendulum
+ * boiling channel
+ * Neutron
+   - 2D PWR paper 2013
+   - bunny
+ * Joe Gayo
+ * YASMFF 2005
+ 
+:::
+::::::::::::::
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+### 4. Quality Assurance
+ 
+ * Generic good software QA practices
+   - Distributed version control system
+   - Automated testing suites
+   - User-reported bug tracking support
+   - Signed releases
+   - etc.
+
+#### 4.1. Reproducibility and traceability
+
+ * Both the source and the documentation should be tracked with a DVCS
+ * Repository should be accessible world-wide
+   - Might need credentials even for RO
+ * Version reporting 
+   - Executables must allow `--version` 
+   - Libaries must provide an API call
+ * The files needed to solve a problem should be simple & traceable by a DVCS
+
+:::
+
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * xxx
+
+
+:::
+::::::::::::::
+
+
+
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+ 
+#### 4.2. Automated testing
+
+ * A mean to test the code is mandatory
+ * After each change
+   - Check for regressions
+   - Problems with already-computed solutions
+   - Different from verification
+ * The compiler should not issue warnings
+ * Dynamic memory allocation checks are recommended
+ * Good practices are suggested
+   - Unit testing
+   - Continuous integration
+   - Test coverage analysis
+
+#### 4.3. Bug reporting and tracking
+
+ * Users should be able to report bugs
+   - A task should be created for each report
+   - Address and document
+:::
+
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * xxx
+
+
+:::
+::::::::::::::
+
+
+
+
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+ 
+
+   
+#### 4.4 Verification
+
+ * Code must be always verified
+ * Check it solves **right the equations**
+   - MES (mandatory)
+   - MMS (recommended)
+ * One test case has to be added to the automated testing
+ * Third-party verification should be allowed
+ * Per-problem documentation
+
+
+ 
+#### 4.5. Validation
+
+ * Code should be validated as required 
+ * Check it solves **the right equations**
+   - Against experiments
+   - Against other codes
+ * Third-party validation should be allowed
+ * Per-application/industry documentation
+   - Procedures following standards
+   
+:::
+
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * xxx
+
+
+:::
+::::::::::::::
+
+
+
+
+## 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+ 
+#### 4.6. Documentation
+
+ * Documentation should be complete
+   - User manual
+     - Tutorial
+     - Reference
+   - Developer guide 
+ * Quick reference cards, video tutorials, etc. not mandatory but recommended
+ * Non-trivial mathematics and methods
+   - Explained
+   - Documented
+ * Should be available as hard copies and mobile-friendly online
+ * Clear licensing scheme for the documentation
+   - People extending the functionality ought to be able to document their work
+ 
+:::
+::: {.column width="50%"}
+
+### FeenoX {.example}
+
+ * Commented sources
+   - Keywords
+   - Functions
+   - Functionals
+   - Variables
+   - Properties
+   - Boundary conditinos
+   - Solutions
+ * Shape functions
+ * not compact! even I have to check the reference
+
+
+:::
+::::::::::::::
+
+
+
+
+
+
+
+
+## Design
+
+ 0. Third-attempt!
+    * see “ancient history” appendix for details
+
+  
+ 4. English-like syntactic-sugared plain-text input files
+    * simple problems ought to need simple inputs
+    * similar problems ought to need similar inputs
+    * robust (`thermal` or `heat`)
+ 
+ 5. Cloud
+    * unattended execution
+    * docker-friendly deployment
+       - git clone from Github
+       - source tarballs
+       - binary tarballs
+    * ability to report status
+    * parallelization through MPI
+    
+ 9. Extensibility
+    * use the existing PDE formulations as templates
+    * build a community!
+
+
+## Point kinetics as ODEs
+
+
 
 
 ## Inverse kinetics as a DAEs
