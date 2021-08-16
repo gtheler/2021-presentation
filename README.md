@@ -293,9 +293,9 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 Solve
 $$
 \begin{cases}
-\dot{x} &= \sigma \cdot (y - x) \\
-\dot{y} &= x \cdot (r - z) - y \\
-\dot{z} &= x \cdot y - b \cdot z
+\dot{x} = \sigma \cdot (y - x) \\
+\dot{y} = x \cdot (r - z) - y \\
+\dot{z} = x \cdot y - b \cdot z
 \end{cases}
 $$
 
@@ -303,9 +303,9 @@ $$
 
 $$
 \begin{cases}
-x(0) &= -11\\
-y(0) &= -16\\
-z(0) &= 22.5\\
+x(0) = -11\\
+y(0) = -16\\
+z(0) = 22.5\\
 \end{cases}
 $$
 
@@ -332,7 +332,7 @@ $
 :::
 ::::::::::::::
 
-## 
+## Lorenz’ system
 
 \centering ![](lorenz.svg)
 
@@ -348,6 +348,7 @@ $
 
 \newcommand{\ruleof}[1]{{\textcolor{cyan}{Rule of {#1}}}}
 \newcommand{\ruleofpar}[1]{\vspace{-0.25cm}\hfill{\footnotesize\textcolor{cyan}{(Rule of {#1})}}}
+
 
  * Should run on mainstream cloud servers
    - GNU/Linux
@@ -376,9 +377,10 @@ $
  * UNIX philosophy: "do one thing well"
    - \ruleof{separation}: no GUI
    - \ruleof{composition}: Gnuplot, Gmsh, ...
-   - ...
+   - ...more rules to come!
  * Third-party math libraries
    - GNU GSL, PETSc, SLEPc, SUNDIALS
+   - \ruleof{modularity}
  * Dependencies available in APT
  
     ```terminal
@@ -668,6 +670,8 @@ $
 
 ```{.feenox include="cantilever/cantilever.fee"}
 ```
+\ruleofpar{generation}
+
 :::
 
 ::: {.column width="40%"}
@@ -690,6 +694,7 @@ Python with Gmsh API
 
 single scalar back 
 
+\ruleofpar{parsimony}
 
 ## 
 
@@ -726,6 +731,7 @@ single scalar back
 ### FeenoX {.example}
 
  * First make it work, then optimize
+   - \ruleof{optimization}
  * Premature optimization is the root of all evil
    - Optimization: TO-DO
    - Parallelization: TO-DO
@@ -741,12 +747,15 @@ single scalar back
     * Autotools & friends
     * Tested with `gcc`, `clang` and `icc`
     * Rust & Go, can't tell (yet)
+    * \ruleof{transparency}
  * Flexibility follows $\rightarrow$
     * Based on the CNA2 experience!
 ::: 
 ::::::::::::::
 
 ## Flexibility I: one-dimensional thermal slabs
+
+\ruleofpar{representation}
 
 ## Flexibility II: two squares in thermal contact
 
@@ -759,8 +768,8 @@ single scalar back
 
 $$
 \begin{cases}
-\dot{\phi}(t) &= \displaystyle \frac{\rho(t) - \Beta}{\Lambda} \cdot \phi(t) + \sum_{i=1}^{N} \lambda_i \cdot c_i \\
-\dot{c}_i(t)  &= \displaystyle \frac{\beta_i}{\Lambda} \cdot \phi(t) - \lambda_i \cdot c_i
+\dot{\phi}(t) = \displaystyle \frac{\rho(t) - \Beta}{\Lambda} \cdot \phi(t) + \sum_{i=1}^{N} \lambda_i \cdot c_i \\
+\dot{c}_i(t)  = \displaystyle \frac{\beta_i}{\Lambda} \cdot \phi(t) - \lambda_i \cdot c_i
 \end{cases}
 $$
 
@@ -825,7 +834,7 @@ $$
 
 ### FeenoX {.example}
 
- * Think for the future! \ruleof{XXX}
+ * Think for the future! \ruleof{extensibility}
    - GPLv3**+**: the '+' is for the future
  * Nice-to-haves
    - Lagrangian elements, DG, $h$-$p$ AMR, ...
@@ -859,9 +868,38 @@ $$
 
 
 
-## Laplace equation with Paraview as post-processor
+## Laplace equation with both Gmsh & Paraview as post-processors
 
-\ruleof{YYY} 
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+Solve $\nabla^2 \phi = 0$ over $[-1:1]\times[-1:1]$ with
+
+$$
+\begin{cases}
+\phi(x,y) = +y & \text{for $x=-1$ (left)} \\
+\phi(x,y) = -y & \text{for $x=+1$ (right)} \\
+\nabla \phi \cdot \hat{\vec{n}} = \sin\left(\frac{\pi}{2} x\right) & \text{for $y=-1$ (bottom)} \\
+\nabla \phi \cdot \hat{\vec{n}} =0 & \text{for $y=+1$ (top)} \\
+\end{cases}
+$$
+
+```{.feenox include="laplace/laplace-square.fee"}
+```
+\ruleofpar{diversity} 
+
+:::
+::: {.column width="40%"}
+
+\centering ![](laplace-square-gmsh.png){width=70%}\
+
+\centering ![](laplace-square-paraview.png){width=80%}\
+
+
+:::
+::::::::::::::
+
+
 
 
 ## 
@@ -936,8 +974,12 @@ $$
 
 ## NAFEMS LE10: English-like problem definition
 
+\ruleof{clarity}
+
+
 ## NAFEMS LE11: everything is an expression
 
+\ruleofpar{least surprise}
 
 ## 
 
@@ -1161,31 +1203,6 @@ $$
 
 
 
-
-
-## Design
-
- 0. Third-attempt!
-    * see “ancient history” appendix for details
-
-  
- 4. English-like syntactic-sugared plain-text input files
-    * simple problems ought to need simple inputs
-    * similar problems ought to need similar inputs
-    * robust (`thermal` or `heat`)
- 
- 5. Cloud
-    * unattended execution
-    * docker-friendly deployment
-       - git clone from Github
-       - source tarballs
-       - binary tarballs
-    * ability to report status
-    * parallelization through MPI
-    
- 9. Extensibility
-    * use the existing PDE formulations as templates
-    * build a community!
 
 
 ## Ancient history
