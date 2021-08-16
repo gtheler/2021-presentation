@@ -11,7 +11,7 @@ outertheme: number
 colorlinks: true
 sansfont: Carlito
 monofont: DejaVuSansMono
-header-includes: \include{syntax.tex}
+header-includes: \include{syntax.tex}\newsavebox{\mybox}
 handout: false
 ...
 
@@ -257,8 +257,8 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * No GUI, console binary executable
  * "Transfer-function"-like between I/O
      * No need to recompile the binary
-
-   ![](transfer.png)\ 
+     
+       ![](transfer.svg){width=90%}\ 
    
  * English-like syntactic-sugared input files
     - nouns are definitions
@@ -266,7 +266,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * Python & Julia API: TODO
    - But already taken into account in the design & implementation
  * Separate mesher
-   - Gmsh (GPLv2, meets SRS)
+   - [Gmsh](http://gmsh.info/) (GPLv2, meets SRS)
    - Anything that writes `.msh`
  * Possibility to use GUI
    - CAEplex <https://www.caeplex.com>
@@ -499,7 +499,7 @@ $
 :::
 
 ::: {.column width="50%"}
-![](maze2.png){width=6cm}\ 
+\centering ![](maze2.png){height=8cm}\ 
 :::
 ::::::::::::::
 
@@ -532,7 +532,7 @@ $
 . . .
 
 ::: {.column width="50%"}
-![](maze3.png){width=6cm}\ 
+\centering ![](maze3.png){height=8cm}\ 
 :::
 ::::::::::::::
 
@@ -579,6 +579,7 @@ $
    
    ```terminal
    $ cd $PETSC_DIR
+   $ export PETSC_ARCH=linux-fast
    $ ./configure --with-debug=0 COPTFLAGS="-Ofast"
    $ make -j8
    ```
@@ -589,19 +590,20 @@ $
    $ git clone https://github.com/seamplex/feenox
    $ cd feenox
    $ ./autogen.sh
-   $ ./configure CC=clang CFLAGS=-Ofast
+   $ export PETSC_ARCH=linux-fast
+   $ ./configure MPICH_CC=clang CFLAGS=-Ofast
    ```
    
- * Pre-compiled binaries with standard optimization
+ * Or use pre-compiled binaries
  
    ```terminal
-   wget http://gmsh.info/bin/Linux/gmsh-${gmsh-version}-Linux64.tgz
-   tar xvzf gmsh-${gmsh-version}-Linux64.tgz
-   wget https://seamplex.com/feenox/dist/linux/feenox-v${feenox-version}-linux-amd64.tar.gz
-   tar xvzf feenox-v${feenox-version}-linux-amd64.tar.gz
+   wget http://gmsh.info/bin/Linux/gmsh-Linux64.tgz
+   wget https://seamplex.com/feenox/dist/linux/feenox-linux-amd64.tar.gz
    ```
+   
+ * Everything is Docker-friendly
 
-  * Execution examples follow $\rightarrow$
+ * Execution examples follow $\rightarrow$
 
 
 :::
@@ -658,6 +660,30 @@ $
 
 ## Parametric execution: shear locking in cantilevered beam
 
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+```{.bash include="cantilever/cantilever.sh"}
+```
+
+```{.feenox include="cantilever/cantilever.fee"}
+```
+:::
+
+::: {.column width="40%"}
+
+![](cantilever-tet.png)
+
+![](cantilever-hex.png)
+
+:::
+::::::::::::::
+
+
+## Parametric execution: shear locking in cantilevered beam
+
+![](cantilever-displacement.pdf)
+
 ## Optimization loop: finding the length of a tuning fork
 
 Python with Gmsh API
@@ -709,11 +735,11 @@ single scalar back
      - Robust but not scalable
    - GAMG-preconditioned KSP
      - Near-nullspace improves convergence
- * Scalable non-linear solvers (PETSc)
+ * Non-linear & transient solvers
+   - Scalable as PETSc
  * Written in ANSI C99 (no C++ nor Fortran)
     * Autotools & friends
     * Tested with `gcc`, `clang` and `icc`
-    * No need for C++ nor Fortran compilers
     * Rust & Go, can't tell (yet)
  * Flexibility follows $\rightarrow$
     * Based on the CNA2 experience!
@@ -1160,19 +1186,6 @@ $$
  9. Extensibility
     * use the existing PDE formulations as templates
     * build a community!
-
-
-## Point kinetics as ODEs
-
-
-
-
-## Inverse kinetics as a DAEs
-
-## Traditional integral-based inverse kinetics
-
-## Point kinetics as reactivity-dependent-frequency lags
-
 
 
 ## Ancient history

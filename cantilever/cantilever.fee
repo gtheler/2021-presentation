@@ -1,0 +1,13 @@
+PROBLEM elastic 3D
+READ_MESH cantilever-$1-$2.msh # in meters
+
+E = 2.1e11   # in Pascals
+nu = 0.3
+
+BC left   fixed
+BC right  tz=-1e5  # traction in Pascals, negative z
+ 
+SOLVE_PROBLEM
+
+# displacement at the tip vs. nodes
+PRINT nodes w(500,0,0) "\# $1 $2"
