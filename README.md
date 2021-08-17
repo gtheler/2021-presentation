@@ -11,7 +11,7 @@ outertheme: number
 colorlinks: true
 sansfont: Carlito
 monofont: DejaVuSansMono
-header-includes: \include{syntax.tex}
+header-includes: \include{syntax.tex}\newsavebox{\mybox}
 handout: false
 ...
 
@@ -257,8 +257,8 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * No GUI, console binary executable
  * "Transfer-function"-like between I/O
      * No need to recompile the binary
-
-   ![](transfer.png)\ 
+     
+       ![](transfer.svg){width=90%}\ 
    
  * English-like syntactic-sugared input files
     - nouns are definitions
@@ -266,7 +266,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * Python & Julia API: TODO
    - But already taken into account in the design & implementation
  * Separate mesher
-   - Gmsh (GPLv2, meets SRS)
+   - [Gmsh](http://gmsh.info/) (GPLv2, meets SRS)
    - Anything that writes `.msh`
  * Possibility to use GUI
    - CAEplex <https://www.caeplex.com>
@@ -293,9 +293,9 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 Solve
 $$
 \begin{cases}
-\dot{x} &= \sigma \cdot (y - x) \\
-\dot{y} &= x \cdot (r - z) - y \\
-\dot{z} &= x \cdot y - b \cdot z
+\dot{x} = \sigma \cdot (y - x) \\
+\dot{y} = x \cdot (r - z) - y \\
+\dot{z} = x \cdot y - b \cdot z
 \end{cases}
 $$
 
@@ -303,9 +303,9 @@ $$
 
 $$
 \begin{cases}
-x(0) &= -11\\
-y(0) &= -16\\
-z(0) &= 22.5\\
+x(0) = -11\\
+y(0) = -16\\
+z(0) = 22.5\\
 \end{cases}
 $$
 
@@ -332,7 +332,7 @@ $
 :::
 ::::::::::::::
 
-## 
+## Lorenz’ system
 
 \centering ![](lorenz.svg)
 
@@ -348,6 +348,7 @@ $
 
 \newcommand{\ruleof}[1]{{\textcolor{cyan}{Rule of {#1}}}}
 \newcommand{\ruleofpar}[1]{\vspace{-0.25cm}\hfill{\footnotesize\textcolor{cyan}{(Rule of {#1})}}}
+
 
  * Should run on mainstream cloud servers
    - GNU/Linux
@@ -376,9 +377,10 @@ $
  * UNIX philosophy: "do one thing well"
    - \ruleof{separation}: no GUI
    - \ruleof{composition}: Gnuplot, Gmsh, ...
-   - ...
+   - ...more rules to come!
  * Third-party math libraries
    - GNU GSL, PETSc, SLEPc, SUNDIALS
+   - \ruleof{modularity}
  * Dependencies available in APT
  
     ```terminal
@@ -499,7 +501,7 @@ $
 :::
 
 ::: {.column width="50%"}
-![](maze2.png){width=6cm}\ 
+\centering ![](maze2.png){height=8cm}\ 
 :::
 ::::::::::::::
 
@@ -532,7 +534,7 @@ $
 . . .
 
 ::: {.column width="50%"}
-![](maze3.png){width=6cm}\ 
+\centering ![](maze3.png){height=8cm}\ 
 :::
 ::::::::::::::
 
@@ -579,6 +581,7 @@ $
    
    ```terminal
    $ cd $PETSC_DIR
+   $ export PETSC_ARCH=linux-fast
    $ ./configure --with-debug=0 COPTFLAGS="-Ofast"
    $ make -j8
    ```
@@ -589,19 +592,20 @@ $
    $ git clone https://github.com/seamplex/feenox
    $ cd feenox
    $ ./autogen.sh
-   $ ./configure CC=clang CFLAGS=-Ofast
+   $ export PETSC_ARCH=linux-fast
+   $ ./configure MPICH_CC=clang CFLAGS=-Ofast
    ```
    
- * Pre-compiled binaries with standard optimization
+ * Or use pre-compiled binaries
  
    ```terminal
-   wget http://gmsh.info/bin/Linux/gmsh-${gmsh-version}-Linux64.tgz
-   tar xvzf gmsh-${gmsh-version}-Linux64.tgz
-   wget https://seamplex.com/feenox/dist/linux/feenox-v${feenox-version}-linux-amd64.tar.gz
-   tar xvzf feenox-v${feenox-version}-linux-amd64.tar.gz
+   wget http://gmsh.info/bin/Linux/gmsh-Linux64.tgz
+   wget https://seamplex.com/feenox/dist/linux/feenox-linux-amd64.tar.gz
    ```
+   
+ * Everything is Docker-friendly
 
-  * Execution examples follow $\rightarrow$
+ * Execution examples follow $\rightarrow$
 
 
 :::
@@ -658,12 +662,39 @@ $
 
 ## Parametric execution: shear locking in cantilevered beam
 
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+```{.bash include="cantilever/cantilever.sh"}
+```
+
+```{.feenox include="cantilever/cantilever.fee"}
+```
+\ruleofpar{generation}
+
+:::
+
+::: {.column width="40%"}
+
+![](cantilever-tet.png)
+
+![](cantilever-hex.png)
+
+:::
+::::::::::::::
+
+
+## Parametric execution: shear locking in cantilevered beam
+
+![](cantilever-displacement.pdf)
+
 ## Optimization loop: finding the length of a tuning fork
 
 Python with Gmsh API
 
 single scalar back 
 
+\ruleofpar{parsimony}
 
 ## 
 
@@ -700,6 +731,7 @@ single scalar back
 ### FeenoX {.example}
 
  * First make it work, then optimize
+   - \ruleof{optimization}
  * Premature optimization is the root of all evil
    - Optimization: TO-DO
    - Parallelization: TO-DO
@@ -709,18 +741,21 @@ single scalar back
      - Robust but not scalable
    - GAMG-preconditioned KSP
      - Near-nullspace improves convergence
- * Scalable non-linear solvers (PETSc)
+ * Non-linear & transient solvers
+   - Scalable as PETSc
  * Written in ANSI C99 (no C++ nor Fortran)
     * Autotools & friends
     * Tested with `gcc`, `clang` and `icc`
-    * No need for C++ nor Fortran compilers
     * Rust & Go, can't tell (yet)
+    * \ruleof{transparency}
  * Flexibility follows $\rightarrow$
     * Based on the CNA2 experience!
 ::: 
 ::::::::::::::
 
 ## Flexibility I: one-dimensional thermal slabs
+
+\ruleofpar{representation}
 
 ## Flexibility II: two squares in thermal contact
 
@@ -733,8 +768,8 @@ single scalar back
 
 $$
 \begin{cases}
-\dot{\phi}(t) &= \displaystyle \frac{\rho(t) - \Beta}{\Lambda} \cdot \phi(t) + \sum_{i=1}^{N} \lambda_i \cdot c_i \\
-\dot{c}_i(t)  &= \displaystyle \frac{\beta_i}{\Lambda} \cdot \phi(t) - \lambda_i \cdot c_i
+\dot{\phi}(t) = \displaystyle \frac{\rho(t) - \Beta}{\Lambda} \cdot \phi(t) + \sum_{i=1}^{N} \lambda_i \cdot c_i \\
+\dot{c}_i(t)  = \displaystyle \frac{\beta_i}{\Lambda} \cdot \phi(t) - \lambda_i \cdot c_i
 \end{cases}
 $$
 
@@ -799,7 +834,7 @@ $$
 
 ### FeenoX {.example}
 
- * Think for the future! \ruleof{XXX}
+ * Think for the future! \ruleof{extensibility}
    - GPLv3**+**: the '+' is for the future
  * Nice-to-haves
    - Lagrangian elements, DG, $h$-$p$ AMR, ...
@@ -833,9 +868,38 @@ $$
 
 
 
-## Laplace equation with Paraview as post-processor
+## Laplace equation with both Gmsh & Paraview as post-processors
 
-\ruleof{YYY} 
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+Solve $\nabla^2 \phi = 0$ over $[-1:1]\times[-1:1]$ with
+
+$$
+\begin{cases}
+\phi(x,y) = +y & \text{for $x=-1$ (left)} \\
+\phi(x,y) = -y & \text{for $x=+1$ (right)} \\
+\nabla \phi \cdot \hat{\vec{n}} = \sin\left(\frac{\pi}{2} x\right) & \text{for $y=-1$ (bottom)} \\
+\nabla \phi \cdot \hat{\vec{n}} =0 & \text{for $y=+1$ (top)} \\
+\end{cases}
+$$
+
+```{.feenox include="laplace/laplace-square.fee"}
+```
+\ruleofpar{diversity} 
+
+:::
+::: {.column width="40%"}
+
+\centering ![](laplace-square-gmsh.png){width=70%}\
+
+\centering ![](laplace-square-paraview.png){width=80%}\
+
+
+:::
+::::::::::::::
+
+
 
 
 ## 
@@ -910,8 +974,12 @@ $$
 
 ## NAFEMS LE10: English-like problem definition
 
+\ruleof{clarity}
+
+
 ## NAFEMS LE11: everything is an expression
 
+\ruleofpar{least surprise}
 
 ## 
 
@@ -1134,44 +1202,6 @@ $$
 
 
 
-
-
-
-## Design
-
- 0. Third-attempt!
-    * see “ancient history” appendix for details
-
-  
- 4. English-like syntactic-sugared plain-text input files
-    * simple problems ought to need simple inputs
-    * similar problems ought to need similar inputs
-    * robust (`thermal` or `heat`)
- 
- 5. Cloud
-    * unattended execution
-    * docker-friendly deployment
-       - git clone from Github
-       - source tarballs
-       - binary tarballs
-    * ability to report status
-    * parallelization through MPI
-    
- 9. Extensibility
-    * use the existing PDE formulations as templates
-    * build a community!
-
-
-## Point kinetics as ODEs
-
-
-
-
-## Inverse kinetics as a DAEs
-
-## Traditional integral-based inverse kinetics
-
-## Point kinetics as reactivity-dependent-frequency lags
 
 
 

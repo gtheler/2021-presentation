@@ -11,12 +11,6 @@ date: ${date}
 ...
 EOF
 
-pandoc -s -f markdown+smart -t beamer+smart hash.yaml README.md -o README.pdf \
-  --lua-filter=include-code-files.lua \
-  --lua-filter=code-style.lua \
-  --listings \
-  --pdf-engine=xelatex \
-  --template=template.tex
 
 # pandoc -s -f markdown+smart -t beamer+smart hash.yaml README.md -o README.tex \
 #   --lua-filter=include-code-files.lua \
@@ -24,6 +18,14 @@ pandoc -s -f markdown+smart -t beamer+smart hash.yaml README.md -o README.pdf \
 #   --listings \
 #   --pdf-engine=xelatex \
 #   --template=template.tex
+  
+
+pandoc -s -f markdown+smart -t beamer+smart hash.yaml README.md -o README.pdf \
+  --lua-filter=include-code-files.lua \
+  --lua-filter=code-style.lua \
+  --listings \
+  --pdf-engine=xelatex \
+  --template=template.tex
   
 # pandoc -s -f markdown+smart -t beamer+smart README.md -M handout=true --listings  --pdf-engine=xelatex -o README-handout.pdf
 
