@@ -2,7 +2,7 @@
 /* Tolerance 0.1: 1696 points / 1701 curves */
 
 u = 1; 
-lc = 50;
+lc = 25;
 
 Point (1692) = {914.399 *u, 91.4399 *u, 0 *u, lc} ;
 Point (1693) = {914.399 *u, -125.871 *u, 0 *u, lc} ;
@@ -3431,3 +3431,7 @@ Recursive Delete {
 Physical Surface("bulk") = {1};
 Physical Curve("start") = {1588, 1587};
 Physical Curve("end") = {410, 409};
+Mesh.Algorithm = 6;
+Mesh.Optimize = 1;
+Mesh.OptimizeNetgen = 1;
+Mesh.RecombineAll = 1;

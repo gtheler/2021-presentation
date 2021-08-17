@@ -2,7 +2,7 @@
 /* Tolerance 0.1: 4598 points / 4659 curves */
 
 u = 1; 
-lc = 50;
+lc = 25;
 
 Point (4496) = {1038.86 *u, 102.446 *u, 0 *u, lc} ;
 Point (4472) = {1038.58 *u, 49.6707 *u, 0 *u, lc} ;
@@ -9270,3 +9270,7 @@ Plane Surface(1) = {1};
 Physical Surface("bulk") = {1};
 Physical Curve("start") = {2833, 2834};
 Physical Curve("end") = {4079, 4080};
+Mesh.Algorithm = 6;
+Mesh.Optimize = 1;
+Mesh.OptimizeNetgen = 1;
+Mesh.RecombineAll = 1;

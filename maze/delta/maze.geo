@@ -2,7 +2,7 @@
 /* Tolerance 0.1: 1910 points / 1932 curves */
 
 u = 1; 
-lc = 20;
+lc = 25;
 
 Point (1908) = {920.326 *u, 77.3289 *u, 0 *u, lc} ;
 Point (1888) = {920.044 *u, 35.8423 *u, 0 *u, lc} ;
@@ -3855,3 +3855,7 @@ Plane Surface(1) = {1};
 Physical Surface("bulk") = {1};
 Physical Curve("start") = {609, 610};
 Physical Curve("end") = {1686, 1685};
+Mesh.Algorithm = 6;
+Mesh.Optimize = 1;
+Mesh.OptimizeNetgen = 1;
+Mesh.RecombineAll = 1;
