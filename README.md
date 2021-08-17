@@ -1,5 +1,7 @@
 ---
-title: A free and open source computational tool to solve differential equations in the cloud
+title: |
+ | A free and open source computational tool
+ | for solving differential equations in the cloud
 author: Jeremy Theler
 email: jeremy@seamplex.com
 aspectratio: 169
@@ -11,7 +13,7 @@ outertheme: number
 colorlinks: true
 sansfont: Carlito
 monofont: DejaVuSansMono
-header-includes: \include{syntax.tex}\newsavebox{\mybox}
+header-includes: \include{syntax.tex}
 handout: false
 ...
 
@@ -295,7 +297,7 @@ $$
 \begin{cases}
 \dot{x} = \sigma \cdot (y - x) \\
 \dot{y} = x \cdot (r - z) - y \\
-\dot{z} = x \cdot y - b \cdot z
+\dot{z} = x y - b z
 \end{cases}
 $$
 
@@ -334,7 +336,7 @@ $
 
 ## Lorenz’ system
 
-\centering ![](lorenz.svg)
+![](lorenz.svg)
 
  
  
@@ -346,6 +348,7 @@ $
 
 ### 2. Architecture
 
+\newcommand{\unix}{{\textcolor{cyan}{UNIX}}}
 \newcommand{\ruleof}[1]{{\textcolor{cyan}{Rule of {#1}}}}
 \newcommand{\ruleofpar}[1]{\vspace{-0.25cm}\hfill{\footnotesize\textcolor{cyan}{(Rule of {#1})}}}
 
@@ -374,7 +377,7 @@ $
 ### FeenoX {.example}
 
  * Third attempt (after v1 & v2)
- * UNIX philosophy: "do one thing well"
+ * \unix philosophy: "do one thing well"
    - \ruleof{separation}: no GUI
    - \ruleof{composition}: Gnuplot, Gmsh, ...
    - ...more rules to come!
@@ -542,9 +545,25 @@ $
 
 ## The life on an influencer...
 
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
 \centering ![](maze-linkedin.png)
 
+:::
 
+
+::: {.column width="50%"}
+
+<http://www.mazegenerator.net/Examples.aspx>
+
+\centering ![](maze3.png){width=45%}
+\centering ![](maze-sigma.png){width=45%}
+
+\centering ![](maze-delta.png){width=45%}
+\centering ![](maze-theta.png){width=45%}
+:::
+::::::::::::::
 
 ## 
 
@@ -749,7 +768,6 @@ single scalar back
     * Rust & Go, can't tell (yet)
     * \ruleof{transparency}
  * Flexibility follows $\rightarrow$
-    * Based on the CNA2 experience!
 ::: 
 ::::::::::::::
 
@@ -758,6 +776,29 @@ single scalar back
 \ruleofpar{representation}
 
 ## Flexibility II: two squares in thermal contact
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+\centering ![](two-squares-mesh.svg){width=85%}
+
+```{.feenox include="two-squares/two-squares.fee"}
+```
+:::
+
+. . .
+
+::: {.column width="50%"}
+
+
+\centering ![](two-squares-temperature.png){width=75%}
+
+\centering ![](two-squares-conductivity.png){width=75%}
+
+ * FeenoX detects the problem is non-linear
+ * TODO: roughish output
+:::
+::::::::::::::
 
 ## Flexibility III: time-dependent BCs
 
@@ -1227,3 +1268,4 @@ $$
  
  
  
+  
