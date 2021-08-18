@@ -183,8 +183,8 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * Application to industrial problems
    - Open source (to allow third-party V&V)
  * First basic version should some problems
- * It should be extensible to other formulations 
-   - Free (as in freedom to hire somebody to extend it)
+ * It should be extensible to other problems & formulations 
+   - Free (as in freedom to hire somebody to modify/extend it)
 
 #### 1.1. Objective
 
@@ -592,6 +592,8 @@ $
  
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
@@ -745,6 +747,8 @@ single scalar back
     
 :::
 
+. . .
+
 ::: {.column width="52.5%"}
 
 ### FeenoX {.example}
@@ -771,9 +775,16 @@ single scalar back
 ::: 
 ::::::::::::::
 
-## Flexibility I: one-dimensional thermal slabs
+## Flexibility I: one-dimensional thermal slab
 
 \ruleofpar{representation}
+
+## Flexibility I: one-dimensional thermal slabs
+
+ * INCLUDE
+ * Convection as expressions
+ * Radiation
+
 
 ## Flexibility II: two squares in thermal contact
 
@@ -784,6 +795,7 @@ single scalar back
 
 ```{.feenox include="two-squares/two-squares.fee"}
 ```
+\ruleofpar{something}
 :::
 
 . . .
@@ -801,6 +813,8 @@ single scalar back
 ::::::::::::::
 
 ## Flexibility III: time-dependent BCs
+
+ Gmsh video
 
 ## Flexibility IV: point kinetics with pointwise reactivity
 
@@ -893,16 +907,8 @@ $$
    - Gmsh (+ Meshio), Paraview
    - CAEplex
    - PrePoMax, FreeCAD, ...: TO-DO
-   
- EXTENSIBILITY
-  - transient kinetics pcamusso
-  - heat eze?
-  - misc, other problems rvignolo
-  - epellegrino, waspy
-   
-  - every feature is there becasue there was at least one need from an actual project
+
   
-  - ejercicio fatiga 3 bars
 :::
 ::::::::::::::
 
@@ -975,37 +981,26 @@ $$
 
 ### FeenoX {.example}
 
- * Symbios
-
- * ASCII progress bars
+ * Already deployed industrial human-less solution (based on v2)
+   - Transfer-function-like
+   
+ * There are ASCII progress bars
    - Build matrix
    - Solve equations
    - Gradient recovery
- * Heartbeat
+ * Heartbeat: TO-DO
 
- * Everything is an expression
- * English self evident problem-like
- * ASCII
- * Syntactic sugared
- * Robust
- 
- * Simple problem, simple input
- * Similar problems, similar inputs
- 
- * Rule of least surprise
-   f(x) = x^2
- * NAFEMS LE11:
-   - English
-   - problem-like
-   - expression
-   - simple
- * Thermal slabs
-   - k(x,T)
- * Convection as expressions
- * Radiation
- 
-
- 
+ * English self evident ASCII input
+   - Simple problems, simple inputs
+   - Similar problems, similar inputs
+   - Syntactic sugared
+   - Everything is an expression
+   - Robust (`heat` or `thermal`)
+   - \ruleof{least surprise} $f(x)=x^2$:
+     ```feenox
+     f(x) = x^2  
+     ```
+   - Expansion of command line arguments
 :::
 ::::::::::::::
 
@@ -1047,16 +1042,19 @@ $$
 
 ### FeenoX {.example}
 
- * \ruleof{economy}
- * silence
+ * Output is 100% user-defined
+   * \ruleof{economy}
+ * No `PRINT` no output
+   * \ruleof{silence}
+ * ASCII columns 
+   * Gnuplot & compatible
+   * Markdown/\LaTeX tables
+ 
  
  * 100% user-defined
    - Pi
    - sophomore
  * NAFEMS LE10
- * Transient 1D thermal Gmsh
- * Alambre PDF experimetnal 101
-   - markdown table
  * Tablas fatiga
  * modal NAFEMS
  * hdf5?
@@ -1068,9 +1066,35 @@ $$
    - bunny
  * Joe Gayo
  * YASMFF 2005
+ * ejercicio fatiga 3 bars
+ 
  
 :::
 ::::::::::::::
+
+##
+
+## 100% user-defined output: cycle loads
+
+Fatiga 3 bars
+
+## Markdown table: natural oscillation frequencies
+
+Alambre PDF
+
+## Professional tables: environmentally-assisted fatigue
+
+CNE
+NAFEMS
+
+
+## Data for videos: double pendulums & boiling channel
+
+
+## Complex figures: 2D IAEA PWR Benchmark
+
+
+## Unstructured grids: the $S_2$ Stanford Bunny
 
 
 ## 
@@ -1196,6 +1220,17 @@ $$
 ::::::::::::::
 
 
+## Verification with MES
+
+Parallelepiped
+
+## Verification with MMS
+
+Square
+
+## Experimental Validation
+
+Joe Gayo
 
 
 ## 
@@ -1241,7 +1276,18 @@ $$
 
 
 
+## Conclusions
 
+   
+ EXTENSIBILITY
+  - transient kinetics pcamusso
+  - heat eze?
+  - misc, other problems rvignolo
+  - epellegrino, waspy
+   
+  - every feature is there becasue there was at least one need from an actual project
+  
+## TO-DOs
 
 
 
