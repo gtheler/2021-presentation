@@ -1,0 +1,34 @@
+DEFAULT_ARGUMENT_VALUE 1 5
+
+yield1 = 3
+yield2 = 2
+yield3 = 0.5
+E = 1
+
+eps_max = $1
+
+dt_0 = 1e-6
+end_time = 2*eps_max
+TIME_PATH end_time
+
+PHASE_SPACE eps sigma1 sigma2 sigma3 P
+
+eps_0 = 0
+sigma1_0 = 0
+sigma2_0 = 0
+sigma3_0 = 0
+P_0 = 0
+
+# eps_dot .= if(t<eps_max, +1, -1) 
+eps .= eps_max * sin(3*pi*t/end_time)
+
+sigma1_dot .= E * eps_dot * if((eps_dot < 0 | sigma1 < yield1) & (eps_dot > 0 | sigma1 > (-yield1)))
+sigma2_dot .= E * eps_dot * if((eps_dot < 0 | sigma2 < yield2) & (eps_dot > 0 | sigma2 > (-yield2)))
+sigma3_dot .= E * eps_dot * if((eps_dot < 0 | sigma3 < yield3) & (eps_dot > 0 | sigma3 > (-yield3)))
+P .= sigma1 + sigma2 + sigma3
+
+PRINT FILE_PATH uno.dat t eps P sigma1 sigma2 sigma3
+
+# IF done
+#  SHELL "pyxplot 3bars.ppl"
+# ENDIF
