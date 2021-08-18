@@ -1,0 +1,11 @@
+PROBLEM heat 1D
+READ_MESH slab.msh
+
+BC left  T=0
+BC right T=1
+
+INCLUDE $1.fee   # read k and solution from $1
+
+SOLVE_PROBLEM
+
+PRINT_FUNCTION T T_analytical MIN 0 MAX 1 NSTEPS 100

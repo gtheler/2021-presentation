@@ -1,0 +1,3 @@
+a = 2            # temperature.fee
+k(x) = 1+a*T(x)
+T_analytical(x) = (1/a)*(sqrt(1+(2+a)*a*x)-1)

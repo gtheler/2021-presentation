@@ -1,0 +1,22 @@
+# NAFEMS-T3 benchmark: 1d transient heat conduction
+PROBLEM heat DIMENSIONS 1
+READ_MESH slab-0.1m.msh
+
+T_0(x) = 0         # initial condition
+
+BC left  T=0       # prescribed temperatures
+BC right T=100*sin(pi*t/40)
+
+k = 35.0           # conductivity [W/(m K)]
+cp = 440.5         # heat capacity [J/(kg K)]
+rho = 7200         # density [kg/m^3]
+
+end_time = 32      # trasient up to 32 seconds
+
+SOLVE_PROBLEM
+
+PRINT %.3f t dt %.2f T(0.1) T(0.08) 
+
+IF done
+ PRINT "\# result = " T(0.08) "ºC"
+ENDIF

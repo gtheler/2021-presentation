@@ -1,0 +1,2 @@
+k = 1            # uniform.fee
+T_analytical(x) = x

@@ -51,6 +51,7 @@ handout: false
 
 ## How do we write papers/reports/documents?
 
+\newcommand{\todo}{\textcolor{Plum}{TO-DO}}
 \newcommand{\good}{\textcolor{OliveGreen}{$\checkmark$}}
 \newcommand{\bad}{\textcolor{red}{$\times$}}
 \newcommand{\neutral}{\textcolor{DarkBlue}{$\sim$}}
@@ -265,7 +266,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * English-like syntactic-sugared input files
     - nouns are definitions
     - verbs are instructions
- * Python & Julia API: TODO
+ * Python & Julia API: \todo
    - But already taken into account in the design & implementation
  * Separate mesher
    - [Gmsh](http://gmsh.info/) (GPLv2, meets SRS)
@@ -439,11 +440,11 @@ $
    - Bare-metal servers
    - AWS/DigitalOcean/Contabo
 
- * Parallelization: TO-DO
+ * Parallelization: \todo
    - Gmsh partitioning with METIS
    - PETSc/SLEPc with MPI
 
- * Mobile: TO-DO
+ * Mobile: \todo
 :::
 ::::::::::::::
 
@@ -615,6 +616,8 @@ $
    $ ./autogen.sh
    $ export PETSC_ARCH=linux-fast
    $ ./configure MPICH_CC=clang CFLAGS=-Ofast
+   $ make -j8
+   # make install
    ```
    
  * Or use pre-compiled binaries
@@ -756,9 +759,9 @@ single scalar back
  * First make it work, then optimize
    - \ruleof{optimization}
  * Premature optimization is the root of all evil
-   - Optimization: TO-DO
-   - Parallelization: TO-DO
-   - Comparison: TO-DO
+   - Optimization: \todo
+   - Parallelization: \todo
+   - Comparison: \todo
  * Linear solvers
    - Direct solver MUMPS
      - Robust but not scalable
@@ -777,25 +780,119 @@ single scalar back
 
 ## Flexibility I: one-dimensional thermal slab
 
-\ruleofpar{representation}
+:::::::::::::: {.columns}
+::: {.column width="45%"}
 
-## Flexibility I: one-dimensional thermal slabs
+Solve heat conduction on the slab $x \in [0:1]$ with boundary conditions
 
- * INCLUDE
- * Convection as expressions
- * Radiation
+$$
+\begin{cases}
+T(0) = 0 & \text{(left)} \\
+T(1) = 1 & \text{(right)} \\
+\end{cases}
+$$
+
+\noindent and uniform conductivity. Compute $T\left(\frac{1}{2}\right)$.
+
+. . . 
+
+ * English self-evident ASCII input
+   - Syntactic sugar
+   - Simple problems, simple inputs
+   - Robust (`heat` or `thermal`)
+
+ * Mesh separated from problem
+   - Git-friendly `.geo` & `.fee`
+   
+ * Output is 100% user-defined
+   - No `PRINT` no output
+   - \ruleof{silence}
+  
+ * There is no node at $x=1/2=0.5$!
+   
+:::
+
+::: {.column width="55%"}
+
+```{.c include="thermal-slabs/slab.geo"}
+```
+\ruleofpar{composition}
+
+```{.feenox include="thermal-slabs/thermal-1d-dirichlet-uniform-k.fee"}
+```
+\ruleofpar{simplicity}
+
+```terminal
+$ gmsh -1 slab.geo
+[...]
+Info    : 4 nodes 5 elements
+Info    : Writing 'slab.msh'...
+[...]
+$ feenox thermal-1d-dirichlet-uniform-k.fee 
+0.5
+$ 
+```
+\ruleofpar{economy}
+:::
+
+::::::::::::::
+
+## Flexibility II: one-dimensional thermal slabs
 
 
-## Flexibility II: two squares in thermal contact
+:::::::::::::: {.columns}
+::: {.column width="45%"}
+
+```{.feenox include="thermal-slabs/thermal-1d-dirichlet.fee"}
+```
+
+
+```{.feenox include="thermal-slabs/uniform.fee"}
+```
+
+```{.feenox include="thermal-slabs/space.fee"}
+```
+
+```{.feenox include="thermal-slabs/temperature.fee"}
+```
+
+. . . 
+
+ * Everything is an expression
+ * Similar problems need similar inputs
+ * \ruleof{least surprise}: $k(x)=1+x$
+   
+:::
+
+::: {.column width="55%"}
+
+```bash
+for i in uniform space temperature; do
+  feenox thermal-1d-dirichlet.fee ${i} > ${i}.dat
+done
+```
+
+\centering ![](thermal-slabs.pdf){width=75%}
+
+ * FeenoX can tell that $k(T)$ is non-linear
+   - It switchs from `KSP` to `SNES`
+
+:::
+
+::::::::::::::
+
+
+
+## Flexibility III: two squares in thermal contact
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 
-\centering ![](two-squares-mesh.svg){width=85%}
+\centering ![](two-squares-mesh.svg){width=70%}
 
 ```{.feenox include="two-squares/two-squares.fee"}
 ```
-\ruleofpar{something}
+\ruleofpar{clarity}
 :::
 
 . . .
@@ -808,13 +905,44 @@ single scalar back
 \centering ![](two-squares-conductivity.png){width=75%}
 
  * FeenoX detects the problem is non-linear
- * TODO: roughish output
+ * \todo: roughish output
 :::
 ::::::::::::::
 
-## Flexibility III: time-dependent BCs
+## Flexibility IV: thermal transient with time-dependent BCs
 
- Gmsh video
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+\centering ![](nafems-t3.png){width=75%}
+
+:::
+
+. . .
+
+::: {.column width="50%"}
+
+```{.feenox include="nafems-t3/nafems-t3.fee"}
+```
+
+```terminal
+$ feenox nafems-t3.fee 
+0.000   0.062   0.00    0.00
+0.002   0.002   0.01    0.00
+[...]
+30.871  0.565   65.71   36.04
+31.435  0.565   62.31   36.33
+32.000  1.050   58.78   36.56
+# result =      36.5636 ºC
+$
+```
+
+:::
+::::::::::::::
+
+## Flexibility V: 3D thermal transient with $k(\vec{x})$
+
+
 
 ## Flexibility IV: point kinetics with pointwise reactivity
 
@@ -897,7 +1025,7 @@ $$
    - Each PDE has an independent directory
    - "Virtual methods" as function pointers
    - Use Laplace as a template
- * Coupled calculations: TO-DO
+ * Coupled calculations: \todo
    - Wide experience from CNA2 (v2)
    - Plain (RAM-disk) files
    - Shared memory & semaphores
@@ -906,7 +1034,7 @@ $$
    - Gnuplot, matplotlib, etc.
    - Gmsh (+ Meshio), Paraview
    - CAEplex
-   - PrePoMax, FreeCAD, ...: TO-DO
+   - PrePoMax, FreeCAD, ...: \todo
 
   
 :::
@@ -982,20 +1110,19 @@ $$
 ### FeenoX {.example}
 
  * Already deployed industrial human-less solution (based on v2)
-   - Transfer-function-like
+   - Transfer-function-like workflow
    
  * There are ASCII progress bars
    - Build matrix
    - Solve equations
    - Gradient recovery
- * Heartbeat: TO-DO
+ * Heartbeat: \todo
 
  * English self evident ASCII input
+   - Syntactically-sugared
    - Simple problems, simple inputs
    - Similar problems, similar inputs
-   - Syntactic sugared
    - Everything is an expression
-   - Robust (`heat` or `thermal`)
    - \ruleof{least surprise} $f(x)=x^2$:
      ```feenox
      f(x) = x^2  
@@ -1287,7 +1414,7 @@ Joe Gayo
    
   - every feature is there becasue there was at least one need from an actual project
   
-## TO-DOs
+## \todo
 
 
 
