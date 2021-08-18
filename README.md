@@ -558,11 +558,13 @@ $
 
 <http://www.mazegenerator.net/Examples.aspx>
 
-\centering ![](maze3.png){width=45%}
-\centering ![](maze-sigma.png){width=45%}
+<!-- \centering ![](maze3.png){width=45%} -->
 
+\centering ![](maze-sigma.png){width=45%}
 \centering ![](maze-delta.png){width=45%}
+
 \centering ![](maze-theta.png){width=45%}
+\centering ![](big-maze-solved.png){width=45%}
 :::
 ::::::::::::::
 
@@ -943,6 +945,11 @@ $
 ## Flexibility V: 3D thermal transient with $k(\vec{x})$
 
 
+\centering ![](valve.png){width=70%}
+
+<https://www.seamplex.com/feenox/videos>
+
+
 
 ## Flexibility IV: point kinetics with pointwise reactivity
 
@@ -1181,8 +1188,6 @@ $$
  * 100% user-defined
    - Pi
    - sophomore
- * NAFEMS LE10
- * Tablas fatiga
  * modal NAFEMS
  * hdf5?
 
@@ -1211,11 +1216,50 @@ Alambre PDF
 
 ## Professional tables: environmentally-assisted fatigue
 
-CNE
-NAFEMS
+:::::::::::::: {.columns}
+::: {.column width="55%"}
+
+![](nureg.png)
+
+![](cne.png)
+
+:::
+
+::: {.column width="45%"}
+
+\vspace{1cm}
+
+ * Computation of NUREG-EPRI sample problem for Environmentally-assisted fatigue in NPP piping
+
+\bigskip 
+ 
+ * Top is a table from a publication by a multi-billion dollar agency
+ * Bottom is a PDF from FeenoX output piped through
+   - AWK
+   - \LaTeX
+
+:::
+::::::::::::::
+
+## Data for videos I: four double pendulums (v2)
+
+\centering ![](pendulums.png){width=50%}
+
+<https://www.seamplex.com/feenox/videos>
 
 
-## Data for videos: double pendulums & boiling channel
+## Data for videos II: boiling channel with sinusoidal power profile (v2)
+
+\centering ![](sine.png){width=65%}
+
+<https://www.seamplex.com/feenox/videos>
+
+## Data for videos III: modal analysis for seismic analysis of piping (v2)
+
+\centering ![](mode5.png){width=80%}
+
+<https://www.seamplex.com/feenox/videos>
+
 
 
 ## Complex figures: 2D IAEA PWR Benchmark
