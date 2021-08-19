@@ -947,7 +947,7 @@ $
 
 \centering ![](valve.png){width=70%}
 
-<https://www.seamplex.com/feenox/videos>
+<https://www.seamplex.com/feenox/videos/thermal-valve-smooth.mp4>
 
 
 
@@ -1176,35 +1176,27 @@ $$
 
 ### FeenoX {.example}
 
- * Output is 100% user-defined
-   * \ruleof{economy}
- * No `PRINT` no output
-   * \ruleof{silence}
- * ASCII columns 
+ * \ruleof{economy}: output is completely 100% user-defined
+ * \ruleof{silence}: no `PRINT` no output
+ * ASCII columns
+   * `PRINT` & `PRINT_FUNCTION` 
    * Gnuplot & compatible
-   * Markdown/\LaTeX tables
- 
- 
- * 100% user-defined
-   - Pi
-   - sophomore
- * modal NAFEMS
- * hdf5?
+   * Markdown/LaTeX tables
+ * Post-processing formats 
+   * `.msh`
+   * `.vtk`
+   * `.vtu`: \todo
+   * `.hdf5`: \todo
+   * `.frd`: \todo ?
+ * Dumping of vectors & matrices
+   * ASCII
+   * PETSc binary
+   * Octave (sparse)
 
- * double pendulum
- * boiling channel
- * Neutron
-   - 2D PWR paper 2013
-   - bunny
- * Joe Gayo
- * YASMFF 2005
- * ejercicio fatiga 3 bars
- 
  
 :::
 ::::::::::::::
 
-##
 
 ## 100% user-defined output: cycle loads
 
@@ -1245,27 +1237,75 @@ Alambre PDF
 
 \centering ![](pendulums.png){width=50%}
 
-<https://www.seamplex.com/feenox/videos>
+<https://www.seamplex.com/feenox/videos/pendulums.webm>
 
 
 ## Data for videos II: boiling channel with sinusoidal power profile (v2)
 
 \centering ![](sine.png){width=65%}
 
-<https://www.seamplex.com/feenox/videos>
+<https://www.seamplex.com/feenox/videos/sine.webm>
 
 ## Data for videos III: modal analysis for seismic analysis of piping (v2)
 
-\centering ![](mode5.png){width=80%}
+\centering ![](mode5.png){width=75%}
 
-<https://www.seamplex.com/feenox/videos>
+<https://www.seamplex.com/feenox/videos/mode5.mp4>
+<https://www.seamplex.com/feenox/videos/mode6.mp4>
+<https://www.seamplex.com/feenox/videos/mode7.mp4>
+
+## Complex figures: 2D IAEA PWR Benchmark (v2)
 
 
+## Core-level neutronics over unstructured grids: the $S_2$ Stanford Bunny (v2)
 
-## Complex figures: 2D IAEA PWR Benchmark
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+\centering ![](bunny/bunny-phi.png){height=4cm}
+
+:::
+::: {.column width="50%"}
+
+\vspace{1cm}
+
+ * One-group neutron transport
+ * The Stanford Bunny as the geometry
+ * $S_2$ method in 3D (8 angular directions)
+ * Finite elements for spatial discretization
+ 
+:::
+::::::::::::::
 
 
-## Unstructured grids: the $S_2$ Stanford Bunny
+:::::::::::::: {.columns}
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi1.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi2.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi3.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi4.png){height=2cm}
+:::
+::::::::::::::
+:::::::::::::: {.columns}
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi5.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi6.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi7.png){height=2cm}
+:::
+::: {.column width="25%"}
+\centering ![](bunny/bunny-psi8.png){height=2cm}
+:::
+::::::::::::::
 
 
 ## 
@@ -1285,7 +1325,7 @@ Alambre PDF
 #### 4.1. Reproducibility and traceability
 
  * Both the source and the documentation should be tracked with a DVCS
- * Repository should be accessible world-wide
+ * Repository should be accessible online
    - Might need credentials even for RO
  * Version reporting 
    - Executables must allow `--version` 
