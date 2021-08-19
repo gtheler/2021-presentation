@@ -18,8 +18,9 @@ handout: false
 ...
 
 ## Background 1/2
-
-[\centering $\approx$ 15 years of updates!]{=latex}
+```{=latex}
+\centering $\approx$ 15 years of updates!
+```
 
  * 2007 Fuzzy logic & chaotic natural convection loops @ IB
  * 2008 Instabilities in the coupled neutronic-thermal-hydraulic problem @ IB
@@ -212,7 +213,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
     * Development environment is Debian
 \medskip
 
- * Initial version supports (v1 & v2)
+ * Initial version supports
    * Dynamical systems (DAE)
    * Laplace/Poisson/Helmholtz (FEM)
    * Heat (FEM)
@@ -342,7 +343,7 @@ $
 
  
  
-## GUI: CAEplex, finite elements in the cloud
+## Web interface: CAEplex, finite elements in the cloud
 
 \centering ![](caeplex-ipad.jpg){width=70%}
 
@@ -437,6 +438,8 @@ $
     - As control/monitoring devices
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
@@ -526,21 +529,28 @@ $
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
  7. Solve $\nabla^2 \phi = 0$ with BCs
-    - $\phi=0$ at "start",
-    - $\phi=1$ at "end",
-    - $\nabla \phi \cdot \hat{\vec{n}} = 0$ everywhere else
- 
-   ```{.feenox include="maze/maze.fee"}
-   ```
+    \vspace{-0.5cm}
+    $$
+    \begin{cases}
+    \phi=0 & \text{at “start”} \\
+    \phi=1 & \text{at “end”} \\
+    \nabla \phi \cdot \hat{\vec{n}} = 0 & \text{everywhere else} \\
+    \end{cases}
+    $$
+
+    \vspace{-0.5cm}
+    
+    ```{.feenox include="maze/maze.fee"}
+    ```
    
-   ```terminal
-   $ feenox maze.fee
-   $
-   ```
+    ```terminal
+    $ feenox maze.fee
+    $
+    ```
  
-   \ruleofpar{silence}
+    \ruleofpar{silence}
  
- 8. Go to start and follow the gradient $\nabla \phi$!
+ 8. Go to start and follow the gradient\ $\nabla \phi$!
 
 :::
 
@@ -1034,9 +1044,9 @@ $$
 
  * Think for the future! \ruleof{extensibility}
    - GPLv3**+**: the '+' is for the future
- * Nice-to-haves
+ * Nice-to-haves: \todo
    - Lagrangian elements, DG, $h$-$p$ AMR, ...
- * Other problems
+ * Other problems: \todo
    - Each PDE has an independent directory
    - "Virtual methods" as function pointers
    - Use Laplace as a template
@@ -1120,6 +1130,8 @@ $$
 
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
@@ -1133,14 +1145,14 @@ $$
    - Gradient recovery
  * Heartbeat: \todo
 
- * English self evident ASCII input
+ * English self-evident ASCII input
    - Syntactically-sugared
    - Simple problems, simple inputs
    - Similar problems, similar inputs
-   - Everything is an expression
-   - \ruleof{least surprise} $f(x)=x^2$:
+   - Everything is an expression!
+   - \ruleof{least surprise}: $f(x)=\frac{1}{2} \cdot x^2$
      ```feenox
-     f(x) = x^2  
+     f(x) = 1/2 * x^2  
      ```
    - Expansion of command line arguments
 :::
@@ -1183,6 +1195,8 @@ $$
  * Open standards and well-documented formats should be preferred
     
 :::
+
+. . .
 
 ::: {.column width="50%"}
 
@@ -1524,7 +1538,9 @@ Square
 
 ## Experimental Validation
 
-Joe Gayo
+\centering ![](fluence.png){width=65%}
+
+<https://fusor.net/board/viewtopic.php?f=13&t=14087> $\leftarrow$ because it is FOSS!
 
 
 ## 
