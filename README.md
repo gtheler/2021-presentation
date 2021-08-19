@@ -19,6 +19,7 @@ handout: false
 
 ## Background 1/2
 
+[\centering $\approx$ 15 years of updates!]{=latex}
 
  * 2007 Fuzzy logic & chaotic natural convection loops @ IB
  * 2008 Instabilities in the coupled neutronic-thermal-hydraulic problem @ IB
@@ -288,7 +289,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
 
 
 
-## Lorenz’ system
+## Transfer-function & English-like input: Lorenz’ system
 
 :::::::::::::: {.columns}
 ::: {.column width="45%"}
@@ -341,6 +342,14 @@ $
 
  
  
+## GUI: CAEplex, finite elements in the cloud
+
+\centering ![](caeplex-ipad.jpg){width=70%}
+
+<https://www.seamplex.com/feenox/videos/caeplex-ipad.mp4>
+
+<https://www.caeplex.com>
+
 
 ## 
 
@@ -947,11 +956,11 @@ $
 
 \centering ![](valve.png){width=70%}
 
-<https://www.seamplex.com/feenox/videos/thermal-valve-smooth.mp4>
+<https://www.seamplex.com/feenox/videos/temp-valve-smooth.mp4>
 
 
 
-## Flexibility IV: point kinetics with pointwise reactivity
+## Flexibility VI: point kinetics with point-wise reactivity
 
 :::::::::::::: {.columns}
 ::: {.column width="45%"}
@@ -989,13 +998,12 @@ $$
 
 \centering ![](reactivity-from-table.pdf)
 
-## Flexibility V: inverse kinetics as DAEs
+## Flexibility VI: inverse kinetics as DAEs
 
-## Flexibility VI: inverse kinetics as plain-old intregrals
+## Flexibility VII: inverse kinetics as plain-old intregrals
 
-## Flexibility VII: point kinetics as first-order lags
+## Flexibility VIII: point kinetics as first-order lags
 
-## Flexibility VIII: transient heat conduction with\ $k(T)$
 
 
 
@@ -1142,6 +1150,10 @@ $$
 
 ## CAEplex progress status on the cloud
 
+\centering ![](caeplex-progress.png){width=70%}
+
+<https://www.seamplex.com/feenox/videos/caeplex-progress.mp4>
+
 ## NAFEMS LE10: English-like problem definition
 
 \ruleof{clarity}
@@ -1176,7 +1188,7 @@ $$
 
 ### FeenoX {.example}
 
- * \ruleof{economy}: output is completely 100% user-defined
+ * \ruleof{economy}: output is completely defined by the user
  * \ruleof{silence}: no `PRINT` no output
  * ASCII columns
    * `PRINT` & `PRINT_FUNCTION` 
@@ -1200,7 +1212,56 @@ $$
 
 ## 100% user-defined output: cycle loads
 
-Fatiga 3 bars
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+For the model below, draw the sequence of loading and unloading for different levels of strains.
+All bars have the same geometry and elastic properties but different yield stresses.
+
+![](3bars.svg)
+
+```bash
+for i in 1 2 3 4; do
+  feenox 3bars.fee ${i}
+  pyxplot 3bars.ppl
+  mv 3bars-sigma-vs-eps.pdf 3bars-sigma-vs-eps-${i}.pdf 
+done  
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{.feenox include="3bars/3bars.fee"}
+```
+
+:::
+::::::::::::::
+
+
+## 100% user-defined output: cycle loads
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering ![](3bars-sigma-vs-eps-1.pdf){width=80%}
+:::
+
+::: {.column width="50%"}
+\centering ![](3bars-sigma-vs-eps-2.pdf){width=80%}
+:::
+::::::::::::::
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering ![](3bars-sigma-vs-eps-3.pdf){width=80%}
+:::
+
+::: {.column width="50%"}
+\centering ![](3bars-sigma-vs-eps-4.pdf){width=80%}
+:::
+::::::::::::::
+
+
 
 ## Markdown table: natural oscillation frequencies
 
@@ -1255,6 +1316,28 @@ Alambre PDF
 <https://www.seamplex.com/feenox/videos/mode7.mp4>
 
 ## Complex figures: 2D IAEA PWR Benchmark (v2)
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering ![](013.pdf)
+:::
+
+::: {.column width="50%"}
+\centering ![](018.pdf)
+:::
+::::::::::::::
+
+## Complex figures: 2D IAEA PWR Benchmark (v2)
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering ![](053.pdf)
+:::
+
+::: {.column width="50%"}
+\centering ![](058.pdf)
+:::
+::::::::::::::
 
 
 ## Core-level neutronics over unstructured grids: the $S_2$ Stanford Bunny (v2)
