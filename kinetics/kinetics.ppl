@@ -15,8 +15,8 @@ set y2label "reactivity $\rho$ [PCM]"
 
 set key right
 
-set title "Point reactor equations with $\rho(t)$ given as scattered data"
+set title "Point kinetic reactor equations with $\rho(t)$ given as scattered data"
 set output "reactivity-from-table.pdf"
 
-plot "flux.dat" u 1:2        axes x1y1 w lp            color blue ti "flux $\phi(t)$",\
-     "flux.dat" u 1:(1e5*$3) axes x1y2 w l  lw 3 lt 2  color red  ti "reactivity $\rho(t)$"
+plot "flux.dat" u 1:2        axes x1y1 w lp            color blue ti "Flux $\phi(t)$",\
+     "flux.dat" u 1:(1e5*$3) axes x1y2 w l  lw 3 lt 2  color red  ti "Reactivity $\rho(t)$"

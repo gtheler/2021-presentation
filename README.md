@@ -664,12 +664,18 @@ $
 ```{.feenox include="math/fibo_formula.fee"}
 ```
 
+. . .
+
 ```{.feenox include="math/fibo_vector.fee"}
 ```
+
+. . .
 
 ```{.feenox include="math/fibo_iterative.fee"}
 ```
 :::
+
+. . .
 
 ::: {.column width="40%"}
 ```terminal
@@ -1001,6 +1007,12 @@ $$
 ::: {.column width="55%"}
 ```{.feenox include="kinetics/reactivity-from-table.fee"}
 ```
+
+```terminal
+$ feenox reactivity-from-table.fee > flux.dat
+$
+```
+
 :::
 ::::::::::::::
 
@@ -1008,9 +1020,37 @@ $$
 
 \centering ![](reactivity-from-table.pdf)
 
-## Flexibility VI: inverse kinetics as DAEs
+## Flexibility VI: inverse kinetics
 
-## Flexibility VII: inverse kinetics as plain-old intregrals
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{.feenox include="kinetics/inverse-integral.fee"}
+```
+
+. . . 
+
+```{.feenox include="kinetics/inverse-dae.fee"}
+```
+
+:::
+
+
+. . .
+
+::: {.column width="50%"}
+
+```terminal
+$ feenox inverse-dae.fee flux.dat > inverse-dae.dat
+$ feenox inverse-integral.fee flux.dat > inverse-integral.dat
+```
+
+\centering ![](inverse.pdf){width=80%}
+
+\centering ![](inverse-zoom.pdf){width=80%}
+
+:::
+::::::::::::::
+
 
 ## Flexibility VIII: point kinetics as first-order lags
 
@@ -1038,6 +1078,9 @@ $$
    - Coupled multi-physics calculations
     
 :::
+
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
@@ -1089,6 +1132,9 @@ $$
 \ruleofpar{diversity} 
 
 :::
+
+. . .
+
 ::: {.column width="40%"}
 
 \centering ![](laplace-square-gmsh.png){width=70%}\

@@ -1,0 +1,8 @@
+end_time = 2
+
+VECTOR c[2]
+VECTOR tau[2] DATA 1 2
+
+c[i] = lag(heaviside(t-1),tau[i])
+
+PRINT t c[1] c[2]

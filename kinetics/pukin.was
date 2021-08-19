@@ -1,37 +1,56 @@
-INCLUDE parameters.was
+# INCLUDE parameters.fee
+
+
+nprec = 15
+VECTOR c[nprec]
+# VECTOR lambda[nprec]
+VECTOR beta[nprec] DATA {
+ 2.57317E-04  1.49538E-03 
+ 1.35390E-03  2.96261E-03 
+ 1.01695E-03  2.30924E-04 
+ 1.43148E-07  2.94892E-07 
+ 9.24913E-07  6.69953E-06 
+ 5.92674E-06  9.62183E-06 
+ 2.00423E-05  5.84079E-05 
+ 1.86352E-04 
+}
+
+
+VECTOR tau[nprec] DATA {
+ 7.84929E+01  3.14762E+01 
+ 8.48176E+00  3.16857E+00 
+ 7.12758E-01  2.55624E-01 
+ 1.59744E+06  2.75482E+05 
+ 2.28833E+04  8.54701E+03 
+ 2.33645E+03  6.66667E+02 
+ 2.07900E+02  5.91716E+01 
+ 3.61011E+00 
+}
+
+Beta = vecsum(beta)
+# PRINT Beta
+# ABORT
+
+Lambda = 6.5E-4
+# Lambda = 40e-6
+
+
 
 end_time = 60
 dt = 0.05
 
-# prescribed reactivity
-FUNCTION react(t) INTERPOLATION akima DATA {
-0       0
-0.5     0
-1       0
-2       1e-5
-3       3e-5
-4       7e-5
-5       9e-5
-6       10e-5
-7       10e-5
-8       10e-5
-10      10e-5
-20      10e-5
-30      3e-5
-40      0
-50      0
-60      0
-}
+FUNCTION react(t) DATA {   0    0
+                           5    0
+                           10  10e-5
+                           30  10e-5
+                           35   0
+                           100  0   }
+VECTOR cbez[nprec]
 
+pkbez_0 = 1   # initial conditions
+cbez_0[i] = pkbez_0
 
-VECTOR cbez SIZE nprec
-
-# condiciones iniciales
-pkbez_0 = 1
-cbez_0(i) = pkbez_0
-
-cbez(i) = lag(pkbez, 1/lambda(i))
+cbez[i] = lag(pkbez, tau[i])
 pkbez = lag(vecdot(beta, cbez)/(Beta - react(t)), Lambda / (Beta - react(t)))
 
-PRINT t pkbez 1e5*react(t)
-
+PRINT t cbez[1] cbez[2] #pkbez 1e5*react(t)
