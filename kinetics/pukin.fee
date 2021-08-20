@@ -1,0 +1,26 @@
+INCLUDE parameters.fee
+
+end_time = 60
+dt = 0.05
+
+FUNCTION react(t) DATA {   0    0
+                           5    0
+                           10  10e-5
+                           30  10e-5
+                           35   0
+                           100  0   }
+VECTOR cbez[nprec]
+
+pkbez_0 = 1   # initial conditions
+cbez_0[i] = pkbez_0
+
+cbez[1] = lag(pkbez, 1/lambda[1])
+cbez[2] = lag(pkbez, 1/lambda[2])
+cbez[3] = lag(pkbez, 1/lambda[3])
+cbez[4] = lag(pkbez, 1/lambda[4])
+cbez[5] = lag(pkbez, 1/lambda[5])
+cbez[6] = lag(pkbez, 1/lambda[6])
+
+pkbez = lag(vecdot(beta, cbez)/(Beta - react(t)), Lambda / (Beta - react(t)))
+
+PRINT t pkbez 1e5*react(t)

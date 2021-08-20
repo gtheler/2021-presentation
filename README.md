@@ -1052,11 +1052,6 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
 ::::::::::::::
 
 
-## Flexibility VIII: point kinetics as first-order lags
-
-
-
-
 ## 
 
 :::::::::::::: {.columns}
@@ -1182,17 +1177,19 @@ $$
 
 ### FeenoX {.example}
 
- * Already deployed industrial human-less solution (based on v2)
-   - Transfer-function-like workflow
-   
+ * Already deployed industrial human-less production workflow (based on v2)
  * There are ASCII progress bars
    - Build matrix
    - Solve equations
    - Gradient recovery
  * Heartbeat: \todo
 
+\medskip 
+ 
  * English self-evident ASCII input
    - Syntactically-sugared
+     - Nouns are definitions
+     - Verbs are instructions
    - Simple problems, simple inputs
    - Similar problems, similar inputs
    - Everything is an expression!
@@ -1477,12 +1474,34 @@ Alambre PDF
 
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
 
- * xxx
+ * Hosted on Github (`git`)
+   - Previously on Bitbucket (`hg`)
+   - Previously on Launchpad (`bzr`)
+   - Previously on-premise (`svn`) 
+ * <https://github.com/seamplex/feenox>
+ * <https://seamplex.com/feenox> \todo
+ * Mailing list (Google group)
+ * Build a community! \todo
+   - Code of conduct
+   
+```terminal
+$ feenox
+FeenoX v0.1.12-gb9a534f-dirty 
+a free no-fee no-X uniX-like finite-element(ish) computational engineering tool
 
+usage: feenox [options] inputfile [replacement arguments]
+[...]
+$
+```
+
+ * `-v`/`--version`: copyright notice
+ * `-V`/`--versions`: linked libraries
 
 :::
 ::::::::::::::
@@ -1517,11 +1536,40 @@ Alambre PDF
    - Address and document
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
 
- * xxx
+```terminal
+$ make check
+Making check in src
+[...]
+PASS: tests/trig.sh
+PASS: tests/vector.sh
+=============================================
+Testsuite summary for feenox v0.1.12-gb9a534f
+=============================================
+# TOTAL: 26
+# PASS:  25
+# SKIP:  0
+# XFAIL: 1
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+=============================================
+$
+```
+
+
+ * Periodic `valgrind` runs
+ * CI & test coverage: \todo
+ 
+\medskip
+
+ * Github issue tracker
+ * Branching & merging procedures: \todo
 
 
 :::
@@ -1563,12 +1611,23 @@ Alambre PDF
    
 :::
 
+. . .
+
 ::: {.column width="50%"}
 
 ### FeenoX {.example}
 
- * xxx
+ * There is a V&V report for the industrial human-less worflow project
+   - Medical devices
+   - Based on ASME V&V 40
 
+ * There is a lot to do!
+   
+ * TL;DR: \todo
+   
+\medskip
+
+ * MES & MMS follow $\rightarrow$
 
 :::
 ::::::::::::::
@@ -1615,6 +1674,8 @@ Square
 
 ### FeenoX {.example}
 
+ * FeenoX is not compact!
+   - Even I have to check the reference
  * Commented sources
    - Keywords
    - Functions
@@ -1624,8 +1685,10 @@ Square
    - Boundary conditinos
    - Solutions
  * Shape functions
- * not compact! even I have to check the reference
-
+ * Gradient recovery
+ * Mathematical models
+ * Code is GPLv3+
+ * Documentation is GFDL\ 1.3
 
 :::
 ::::::::::::::
@@ -1634,14 +1697,17 @@ Square
 
 ## Conclusions
 
+ - Partially working
+ - Should be released as v1.0 in the PhD
+ - A lot \todo
+ - EXTENSIBILITY
+   - transient kinetics pcamusso
+   - heat eze?
+   - misc, other problems rvignolo
+   - epellegrino, waspy
+   - build a community!
    
- EXTENSIBILITY
-  - transient kinetics pcamusso
-  - heat eze?
-  - misc, other problems rvignolo
-  - epellegrino, waspy
-   
-  - every feature is there becasue there was at least one need from an actual project
+ - every feature is there becasue there was at least one need from an actual project
   
 ## \todo
 

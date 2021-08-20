@@ -1,7 +1,7 @@
 # the fibonacci sequence as an iterative problem
 
 static_steps = 20
-#static_iterations = 1476
+#static_iterations = 1476  # limit of doubles
 
 IF step_static=1|step_static=2
  f_n = 1
