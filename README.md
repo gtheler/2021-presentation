@@ -754,7 +754,7 @@ $
  * \ruleof{simplicity}
    - Only one material, no need to link volumes with materials
    ```feenox
-   E = 2.1e11
+   E = 2.1e11   # Young modulus in Pa
    ```
  
 
@@ -1300,9 +1300,38 @@ $$
 
 <https://www.seamplex.com/feenox/videos/caeplex-progress.mp4>
 
-## NAFEMS LE10: English-like problem definition
+## NAFEMS LE10: English-like problem definition & user-defined output
 
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+\centering ![](nafems-le10.png){width=75%}
+
+:::
+
+. . .
+
+::: {.column width="50%"}
+
+```{.feenox include="nafems-le10/nafems-le10.fee"}
+```
 \ruleofpar{clarity}
+
+```terminal
+$ gmsh -3 nafems-le10.geo
+[...]
+Info    : Done meshing order 2 (Wall 0.433083s, CPU 0.414008s)
+Info    : 205441 nodes 59892 elements
+Info    : Writing 'nafems-le10.msh'...
+$ feenox nafems-le10.fee 
+sigma_y @ D =  -5.38361 MPa
+$
+```
+\ruleofpar{economy}
+:::
+::::::::::::::
+
+
 
 
 ## NAFEMS LE11: everything is an expression
@@ -1637,25 +1666,25 @@ $
 
  * Standard test suite
 
-```terminal
-$ make check
-Making check in src
-[...]
-PASS: tests/trig.sh
-PASS: tests/vector.sh
-=============================================
-Testsuite summary for feenox v0.1.12-gb9a534f
-=============================================
-# TOTAL: 26
-# PASS:  25
-# SKIP:  0
-# XFAIL: 1
-# FAIL:  0
-# XPASS: 0
-# ERROR: 0
-=============================================
-$
-```
+   ```terminal
+   $ make check
+   Making check in src
+   [...]
+   PASS: tests/trig.sh
+   PASS: tests/vector.sh
+   =============================================
+   Testsuite summary for feenox v0.1.12-gb9a534f
+   =============================================
+   # TOTAL: 26
+   # PASS:  25
+   # SKIP:  0
+   # XFAIL: 1
+   # FAIL:  0
+   # XPASS: 0
+   # ERROR: 0
+   =============================================
+   $
+   ```
 
 
  * Periodic `valgrind` runs
@@ -1718,24 +1747,23 @@ $
    - Based on ASME V&V 40
 
  * There is a lot to do!
+ 
+ * MES
+   - Set of well-known benchmarks
+   - NAFEMS, IAEA, etc.
+   
+ * MMS
+   - Everything is an expression
+   - Parametric runs
+   - `MESH_INTEGRATE` allows to compute $L_2$ norms directly in the `.fee`
+
+\bigskip
    
  * TL;DR: \todolater
    
-\medskip
-
- * MES & MMS follow $\rightarrow$
-
 :::
 ::::::::::::::
 
-
-## Verification with MES
-
-Parallelepiped
-
-## Verification with MMS
-
-Square
 
 ## Experimental Validation
 
