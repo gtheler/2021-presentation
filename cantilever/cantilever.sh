@@ -4,7 +4,7 @@ rm -f *.dat
 for element in tet4 tet10 hex8 hex20 hex27; do
  for c in $(seq 1 10); do
  
-  # mesh if not alreay cached
+  # create mesh if not alreay cached
   mesh=cantilever-${element}-${c}
   if [ ! -e ${mesh}.msh ]; then
     scale=$(echo "PRINT 1/${c}" | feenox -)

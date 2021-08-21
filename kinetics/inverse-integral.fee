@@ -6,8 +6,8 @@ t_min = vec_flux_t[1]
 t_max = vec_flux_t[vecsize(vec_flux)]
 phi(t) := if(t<t_min, flux(t_min), flux(t))
 
-# compute the reactivity with the integral formula
 VAR t'   # dummy integration variable
+# compute the reactivity with the integral formula
 rho(t) := Lambda * derivative(log(phi(t')),t',t) + Beta * ( 1 - 1/phi(t) * integral(phi(t-t') * sum((lambda[i]*beta[i]/Beta)*exp(-lambda[i]*t'), i, 1, nprec), t', 0, 1e4) )
 
 PRINT_FUNCTION rho MIN t_min MAX t_max STEP (t_max-t_min)/1000

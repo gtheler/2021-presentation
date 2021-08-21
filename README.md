@@ -2,8 +2,11 @@
 title: |
  | A free and open source computational tool
  | for solving differential equations in the cloud
-author: Jeremy Theler
+author: Germán Theler
 email: jeremy@seamplex.com
+institute: |
+ | Mid-term evaluation, PhD in Nuclear Engineering
+ | Instituto Balseiro, San Carlos de Bariloche, Argentina
 aspectratio: 169
 lang: en-US
 theme: default
@@ -139,7 +142,8 @@ handout: false
  
 ## Software Requirement Specifications
 
-A fictitious & imaginary Request for Quotation for a computational tool:
+After a successful project with a foreign company I decided to structure the PhD based on
+a fictitious & imaginary "Request for Quotation" for a computational tool:
 
 :::::::::::::: {.columns}
 ::: {.column width="35%"}
@@ -393,7 +397,7 @@ $
 
 ### FeenoX {.example}
 
- * Third attempt (after v1 & v2)
+ * Third-system effect (after v1 & v2)
  * \unix philosophy: "do one thing well"
    - \ruleof{separation}: no GUI
    - \ruleof{composition}: Gnuplot, Gmsh, ...
@@ -450,18 +454,28 @@ $
 
 ### FeenoX {.example}
 
- * Tested in
+ * Tested on
    - Raspberry Pi
    - Laptop (GNU/Linux & Windows 10)
    - Macbook
    - Desktop PC
    - Bare-metal servers
+   - Vagrant/Virtualbox
+   - Docker/Kubernetes
    - AWS/DigitalOcean/Contabo
 
  * Parallelization: \todolater
    - Gmsh partitioning with METIS
    - PETSc/SLEPc with MPI
 
+ * Web: <https://www.caeplex.com> (v2)
+   
+   \centering
+   ![](logo-caeplex-only-cloud.svg){width=30%}  
+   ![](logo-caeplex-only-text.svg){width=30%}  
+   
+   \raggedright
+   
  * Mobile: \todolater
 :::
 ::::::::::::::
@@ -737,6 +751,13 @@ $
 
 ![](cantilever-hex.png)
 
+ * \ruleof{simplicity}
+   - Only one material, no need to link volumes with materials
+   ```feenox
+   E = 2.1e11
+   ```
+ 
+
 :::
 ::::::::::::::
 
@@ -745,7 +766,7 @@ $
 
 ![](cantilever-displacement.pdf)
 
-## Optimization loop: finding the length of a tuning fork
+## Optimization loop: finding the right length of a tuning fork
 
 
 :::::::::::::: {.columns}
@@ -755,6 +776,8 @@ $
 
 $\ell_1$ to have 440\ Hz?
 :::
+
+. . .
 
 ::: {.column width="40%"}
 
@@ -864,7 +887,7 @@ $
  * Non-linear & transient solvers
    - Scalable as PETSc
  * Written in ANSI C99 (no C++ nor Fortran)
-    * Autotools & friends
+    * Autotools & friends, POSIX
     * Tested with `gcc`, `clang` and `icc`
     * Rust & Go, can't tell (yet)
     * \ruleof{transparency}
@@ -982,7 +1005,7 @@ done
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 
-\centering ![](two-squares-mesh.svg){width=70%}
+\centering ![](two-squares-mesh.svg){width=65%}
 
 ```{.feenox include="two-squares/two-squares.fee"}
 ```
@@ -994,10 +1017,11 @@ done
 ::: {.column width="50%"}
 
 
-\centering ![](two-squares-temperature.png){width=75%}
+\centering ![](two-squares-temperature.png){width=70%}
 
-\centering ![](two-squares-conductivity.png){width=75%}
-
+\centering ![](two-squares-conductivity.png){width=70%}
+ 
+ * Volumes $\Leftrightarrow$ materials now needed
  * FeenoX detects the problem is non-linear
  * \todolater: roughish output
 :::
@@ -1154,7 +1178,7 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
  * Other problems: \todolater
    - Each PDE has an independent directory
    - "Virtual methods" as function pointers
-   - Use Laplace as a template
+   - Use Laplace as a template (elliptic)
  * Coupled calculations: \todolater
    - Wide experience from CNA2 (v2)
    - Plain (RAM-disk) files
@@ -1278,7 +1302,7 @@ $$
 
 ## NAFEMS LE10: English-like problem definition
 
-\ruleof{clarity}
+\ruleofpar{clarity}
 
 
 ## NAFEMS LE11: everything is an expression
@@ -1611,6 +1635,8 @@ $
 
 ### FeenoX {.example}
 
+ * Standard test suite
+
 ```terminal
 $ make check
 Making check in src
@@ -1633,6 +1659,7 @@ $
 
 
  * Periodic `valgrind` runs
+ * Integration tests: \todolater
  * CI & test coverage: \todolater
  
 \medskip
@@ -1745,17 +1772,20 @@ Square
 
  * FeenoX is not compact!
    - Even I have to check the reference
- * Commented sources
+ * Commented sources: \todonow
    - Keywords
    - Functions
    - Functionals
    - Variables
-   - Properties
-   - Boundary conditinos
+   - Material properties
+   - Boundary conditions
    - Solutions
- * Shape functions
- * Gradient recovery
- * Mathematical models
+ * Shape functions: \todonow
+ * Gradient recovery: \todonow
+ * Mathematical models: \todonow
+ 
+\medskip
+ 
  * Code is GPLv3+
  * Documentation is GFDLv1.3+
 
@@ -1764,26 +1794,24 @@ Square
 
 
 
-## Conclusions
+## Conclusions---FeenoX...
 
- - Partially working
- - Should be released as v1.0 in the PhD
- - A lot \todolater
- - EXTENSIBILITY
-   - transient kinetics pcamusso
-   - heat eze?
-   - misc, other problems rvignolo
-   - epellegrino, waspy
-   - build a community!
-   
- - every feature is there becasue there was at least one need from an actual project
-  
-## TO-DOS
-
- \todonow
- 
- \todolater
-
-
+ * closes a 15-year loop (2006--2021) with a third-system effect
+ * is to FEA what Markdown is to documentation
+ * is (so far) the only tool that fulfills 100% a fictitious SRS:
+   - Free and open source (GPLv3+)
+   - No recompilation needed
+   - Cloud and web friendly
+   - Human-less workflow
+ * follows the \unix philosophy: "do one thing well"
+ * is already usable (and used!)
+   - FeenoX v1.0 coincident with the PhD (\todonow)
+     - Laplace, heat, elasticity, modal, neutron transport & diffusion
+     - Every current feature is there because there was at least one need from an actual project
+   - Future versions online (\todolater)
+     - Electromagnetism? CFD? Schrödinger's equation?
+     - Python & Julia API
+     - Coupled & multiphysics computations
+     - Free and open-source online community
 
 
