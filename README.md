@@ -1552,7 +1552,7 @@ Alambre PDF
    - Previously on Launchpad (`bzr`)
    - Previously on-premise (`svn`) 
  * <https://github.com/seamplex/feenox>
- * <https://seamplex.com/feenox> \todo
+ * <https://seamplex.com/feenox> \todonow
  * Mailing list (Google group)
  * Build a community! \todolater
    - Code of conduct
@@ -1778,7 +1778,11 @@ Square
    
  - every feature is there becasue there was at least one need from an actual project
   
-## \todo
+## TO-DOS
+
+ \todonow
+ 
+ \todolater
 
 
 
