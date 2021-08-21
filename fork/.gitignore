@@ -1,0 +1,5 @@
+lib*
+fork.msh
+*.pyc
+gmsh.py
+*.geo

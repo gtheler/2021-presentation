@@ -17,6 +17,7 @@ header-includes: \include{syntax.tex}
 handout: false
 ...
 
+
 ## Background 1/2
 ```{=latex}
 \centering $\approx$ 15 years of updates!
@@ -53,7 +54,8 @@ handout: false
 
 ## How do we write papers/reports/documents?
 
-\newcommand{\todo}{\textcolor{Plum}{TO-DO}}
+\newcommand{\todonow}{\textcolor{Plum}{TO-DO}}
+\newcommand{\todolater}{\textcolor{Orange}{TO-DO}}
 \newcommand{\good}{\textcolor{OliveGreen}{$\checkmark$}}
 \newcommand{\bad}{\textcolor{red}{$\times$}}
 \newcommand{\neutral}{\textcolor{DarkBlue}{$\sim$}}
@@ -79,18 +81,22 @@ handout: false
 
 \rowcolors{1}{black!10}{black!0}
 
- Feature                | \onslide<1->{Word}     |   \onslide<3->{Docs}     |  \onslide<4->{Markdown}    |  \onslide<2->{\TeX}
-:-----------------------|:----------------------:|:------------------------:|:--------------------------:|:------------------------:
- Aesthetics             | \onslide<1->{\bad}     |   \onslide<3->{\bad}     |  \onslide<4->{\good}       |  \onslide<2->{\good}
- Convertibility         | \onslide<1->{\neutral} |   \onslide<3->{\neutral} |  \onslide<4->{\good}       |  \onslide<2->{\neutral}
- Traceability           | \onslide<1->{\bad}     |   \onslide<3->{\neutral} |  \onslide<4->{\good}       |  \onslide<2->{\good}
- Mobile-friendly        | \onslide<1->{\bad}     |   \onslide<3->{\good}    |  \onslide<4->{\good}       |  \onslide<2->{\bad}
- Collaborative          | \onslide<1->{\bad}     |   \onslide<3->{\good}    |  \onslide<4->{\good}       |  \onslide<2->{\neutral}
- Licensing/openness     | \onslide<1->{\bad}     |   \onslide<3->{\bad}     |  \onslide<4->{\good}       |  \onslide<2->{\good}
- Non-nerd friendly      | \onslide<1->{\good}    |   \onslide<3->{\good}    |  \onslide<4->{\neutral}    |  \onslide<2->{\bad}
+ Feature                | \onslide<1->{Word}     |   \onslide<3->{Docs}     |  \onslide<4->{Markdown$^{*}$}    |  \onslide<2->{\TeX}
+:-----------------------|:----------------------:|:------------------------:|:--------------------------------:|:------------------------:
+ Aesthetics             | \onslide<1->{\bad}     |   \onslide<3->{\bad}     |  \onslide<4->{\good}             |  \onslide<2->{\good}
+ Convertibility         | \onslide<1->{\neutral} |   \onslide<3->{\neutral} |  \onslide<4->{\good}             |  \onslide<2->{\neutral}
+ Traceability           | \onslide<1->{\bad}     |   \onslide<3->{\neutral} |  \onslide<4->{\good}             |  \onslide<2->{\good}
+ Mobile-friendliness    | \onslide<1->{\bad}     |   \onslide<3->{\good}    |  \onslide<4->{\good}             |  \onslide<2->{\bad}
+ Collaborative          | \onslide<1->{\bad}     |   \onslide<3->{\good}    |  \onslide<4->{\good}             |  \onslide<2->{\neutral}
+ Licensing/openness     | \onslide<1->{\bad}     |   \onslide<3->{\bad}     |  \onslide<4->{\good}             |  \onslide<2->{\good}
+ Non-nerd friendliness  | \onslide<1->{\good}    |   \onslide<3->{\good}    |  \onslide<4->{\neutral}          |  \onslide<2->{\bad}
 
- 
- 
+\onslide<4->{\centering $^*$ \href{https://en.wikipedia.org/wiki/Markdown}{Markdown} +
+\href{https://pandoc.org/}{Pandoc} + \href{https://git-scm.com/}{Git} +
+\href{https://github.com/}{Github} /
+\href{https://about.gitlab.com/}{Gitlab} /
+\href{https://gitea.com/}{Gitea}}
+
  
 ## How do we do scientific/engineering computations?
 
@@ -114,23 +120,23 @@ handout: false
 
 \rowcolors{1}{black!10}{black!0}
 
- Feature                | \onslide<1->{Desktop GUIs}         |   \onslide<3->{Web frontends} |  \onslide<4->{FeenoX}      |  \onslide<2->{Libraries}
+ Feature                | \onslide<1->{Desktop GUIs}         |   \onslide<3->{Web frontends} |  \onslide<4->{FeenoX$^{*}$}      |  \onslide<2->{Libraries}
 :-----------------------|:----------------------------------:|:-----------------------------:|:--------------------------:|:-----------------------------:
  Flexibility            | \onslide<1->{\neutral}             |   \onslide<3->{\bad}          |  \onslide<4->{\good}       |  \onslide<2->{\good}
  Scalability            | \onslide<1->{\bad}                 |   \onslide<3->{\neutral}      |  \onslide<4->{\good}       |  \onslide<2->{\good}
  Traceability           | \onslide<1->{\bad}                 |   \onslide<3->{\neutral}      |  \onslide<4->{\good}       |  \onslide<2->{\good}
- Cloud-friendly         | \onslide<1->{\bad}                 |   \onslide<3->{\good}         |  \onslide<4->{\good}       |  \onslide<2->{\good}
+ Cloud-friendliness     | \onslide<1->{\bad}                 |   \onslide<3->{\good}         |  \onslide<4->{\good}       |  \onslide<2->{\good}
  Collaborative          | \onslide<1->{\bad}                 |   \onslide<3->{\good}         |  \onslide<4->{\neutral}    |  \onslide<2->{\bad}
- Licensing/openness     | \onslide<1->{\good/\neutral/\bad}  |   \onslide<3->{\bad}          |  \onslide<4->{\good$^*$}   |  \onslide<2->{\good}
- Non-nerd friendly      | \onslide<1->{\good}                |   \onslide<3->{\good}         |  \onslide<4->{\neutral}    |  \onslide<2->{\bad}
+ Licensing/openness     | \onslide<1->{\good/\neutral/\bad}  |   \onslide<3->{\bad}          |  \onslide<4->{\good}       |  \onslide<2->{\good}
+ Non-nerd friendliness  | \onslide<1->{\good}                |   \onslide<3->{\good}         |  \onslide<4->{\neutral}    |  \onslide<2->{\bad}
  
-\onslide<4->{\centering $^*$ FeenoX is GPLv3+, i.e. “libre" or free as in “free speech”}
 
-
-
-
-
-
+\onslide<4->{\centering $^*$ \href{https://seamplex.com/feenox}{FeenoX} +
+\href{http://gmsh.info}{Gmsh} + \href{https://www.paraview.org/}{Paraview} + \href{https://git-scm.com/}{Git} +
+\href{https://github.com/}{Github} /
+\href{https://about.gitlab.com/}{Gitlab} /
+\href{https://gitea.com/}{Gitea}}
+ 
 ## Software Requirement Specifications
 
 A fictitious & imaginary Request for Quotation for a computational tool:
@@ -268,7 +274,7 @@ A fictitious & imaginary Request for Quotation for a computational tool:
  * English-like syntactic-sugared input files
     - nouns are definitions
     - verbs are instructions
- * Python & Julia API: \todo
+ * Python & Julia API: \todolater
    - But already taken into account in the design & implementation
  * Separate mesher
    - [Gmsh](http://gmsh.info/) (GPLv2, meets SRS)
@@ -452,11 +458,11 @@ $
    - Bare-metal servers
    - AWS/DigitalOcean/Contabo
 
- * Parallelization: \todo
+ * Parallelization: \todolater
    - Gmsh partitioning with METIS
    - PETSc/SLEPc with MPI
 
- * Mobile: \todo
+ * Mobile: \todolater
 :::
 ::::::::::::::
 
@@ -657,7 +663,7 @@ $
 ::::::::::::::
 
 
-## Direct execution: three ways of getting the first 25 Fibonacci numbers
+## Direct execution: three ways of getting the first 20 Fibonacci numbers
 
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
@@ -741,11 +747,72 @@ $
 
 ## Optimization loop: finding the length of a tuning fork
 
-Python with Gmsh API
 
-single scalar back 
+:::::::::::::: {.columns}
+::: {.column width="20%"}
 
+\centering ![](fork-meshed.svg)
+
+$\ell_1$ to have 440\ Hz?
+:::
+
+::: {.column width="40%"}
+
+```python
+import math
+import gmsh
+import subprocess  # to call FeenoX and read back
+
+def create_mesh(r, w, l1, l2, n):
+  gmsh.initialize()
+  ...
+  gmsh.finalize()
+  return len(nodes)
+  
+def main():
+  target = 440    # target frequency
+  eps = 1e-2      # tolerance
+  r = 4.2e-3      # geometric parameters
+  w = 3e-3
+  l1 = 30e-3
+  l2 = 60e-3
+
+  for n in range(1,7):   # mesh refinement level
+    l1 = 60e-3              # restart l1 & error
+    error = 60
+    while abs(error) > eps:   # loop
+      l1 = l1 - 1e-4*error
+      # mesh with Gmsh Python API
+      nodes = create_mesh(r, w, l1, l2, n)
+      # call FeenoX and read scalar back
+      # TODO: FeenoX Python API (like Gmsh)
+      result = subprocess.run(['feenox', 'fork.fee'], stdout=subprocess.PIPE)
+      freq = float(result.stdout.decode('utf-8'))
+      error = target - freq
+    
+    print(nodes, l1, freq)
+```
 \ruleofpar{parsimony}
+
+:::
+
+::: {.column width="40%"}
+
+```{.feenox include="fork/fork.fee"}
+```
+\ruleofpar{simplicity}
+
+. . .
+
+```terminal
+$ python fork.py > fork.dat
+$
+``` 
+
+![](fork.pdf)
+
+:::
+::::::::::::::
 
 ## 
 
@@ -786,9 +853,9 @@ single scalar back
  * First make it work, then optimize
    - \ruleof{optimization}
  * Premature optimization is the root of all evil
-   - Optimization: \todo
-   - Parallelization: \todo
-   - Comparison: \todo
+   - Optimization: \todolater
+   - Parallelization: \todolater
+   - Comparison: \todolater
  * Linear solvers
    - Direct solver MUMPS
      - Robust but not scalable
@@ -932,7 +999,7 @@ done
 \centering ![](two-squares-conductivity.png){width=75%}
 
  * FeenoX detects the problem is non-linear
- * \todo: roughish output
+ * \todolater: roughish output
 :::
 ::::::::::::::
 
@@ -1082,13 +1149,13 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
 
  * Think for the future! \ruleof{extensibility}
    - GPLv3**+**: the '+' is for the future
- * Nice-to-haves: \todo
+ * Nice-to-haves: \todolater
    - Lagrangian elements, DG, $h$-$p$ AMR, ...
- * Other problems: \todo
+ * Other problems: \todolater
    - Each PDE has an independent directory
    - "Virtual methods" as function pointers
    - Use Laplace as a template
- * Coupled calculations: \todo
+ * Coupled calculations: \todolater
    - Wide experience from CNA2 (v2)
    - Plain (RAM-disk) files
    - Shared memory & semaphores
@@ -1097,7 +1164,7 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
    - Gnuplot, matplotlib, etc.
    - Gmsh (+ Meshio), Paraview
    - CAEplex
-   - PrePoMax, FreeCAD, ...: \todo
+   - PrePoMax, FreeCAD, ...: \todolater
 
   
 :::
@@ -1111,7 +1178,7 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
 :::::::::::::: {.columns}
 ::: {.column width="60%"}
 
-Solve $\nabla^2 \phi = 0$ over $[-1:1]\times[-1:1]$ with
+Solve $\nabla^2 \phi = 0$ over $[-1:+1]\times[-1:+1]$ with
 
 $$
 \begin{cases}
@@ -1132,7 +1199,7 @@ $$
 
 ::: {.column width="40%"}
 
-\centering ![](laplace-square-gmsh.png){width=70%}\
+\centering \hspace{0.5cm}![](laplace-square-gmsh.png){width=70%}\
 
 \centering ![](laplace-square-paraview.png){width=80%}\
 
@@ -1182,7 +1249,7 @@ $$
    - Build matrix
    - Solve equations
    - Gradient recovery
- * Heartbeat: \todo
+ * Heartbeat: \todolater
 
 \medskip 
  
@@ -1254,9 +1321,9 @@ $$
  * Post-processing formats 
    * `.msh`
    * `.vtk`
-   * `.vtu`: \todo
-   * `.hdf5`: \todo
-   * `.frd`: \todo ?
+   * `.vtu`: \todolater
+   * `.hdf5`: \todolater
+   * `.frd`: \todolater ?
  * Dumping of vectors & matrices
    * ASCII
    * PETSc binary
@@ -1469,7 +1536,7 @@ Alambre PDF
    - Might need credentials even for RO
  * Version reporting 
    - Executables must allow `--version` 
-   - Libaries must provide an API call
+   - Libraries must provide an API call
  * The files needed to solve a problem should be simple & traceable by a DVCS
 
 :::
@@ -1487,7 +1554,7 @@ Alambre PDF
  * <https://github.com/seamplex/feenox>
  * <https://seamplex.com/feenox> \todo
  * Mailing list (Google group)
- * Build a community! \todo
+ * Build a community! \todolater
    - Code of conduct
    
 ```terminal
@@ -1502,6 +1569,8 @@ $
 
  * `-v`/`--version`: copyright notice
  * `-V`/`--versions`: linked libraries
+
+ * \ruleof{generation}: inputs from M4 
 
 :::
 ::::::::::::::
@@ -1564,12 +1633,12 @@ $
 
 
  * Periodic `valgrind` runs
- * CI & test coverage: \todo
+ * CI & test coverage: \todolater
  
 \medskip
 
  * Github issue tracker
- * Branching & merging procedures: \todo
+ * Branching & merging procedures: \todolater
 
 
 :::
@@ -1617,13 +1686,13 @@ $
 
 ### FeenoX {.example}
 
- * There is a V&V report for the industrial human-less worflow project
+ * There is a V&V report for the industrial human-less workflow project
    - Medical devices
    - Based on ASME V&V 40
 
  * There is a lot to do!
    
- * TL;DR: \todo
+ * TL;DR: \todolater
    
 \medskip
 
@@ -1688,7 +1757,7 @@ Square
  * Gradient recovery
  * Mathematical models
  * Code is GPLv3+
- * Documentation is GFDL\ 1.3
+ * Documentation is GFDLv1.3+
 
 :::
 ::::::::::::::
@@ -1699,7 +1768,7 @@ Square
 
  - Partially working
  - Should be released as v1.0 in the PhD
- - A lot \todo
+ - A lot \todolater
  - EXTENSIBILITY
    - transient kinetics pcamusso
    - heat eze?
@@ -1714,26 +1783,3 @@ Square
 
 
 
-## Ancient history
-
- * 2006: Matlab & point kinetics (Dr.\ Etchepareborda)
- * 2006--2007: melon (& meloncito) for fuzzy control @ CABLCB
- * 2007--2008: point kinetics with TH feeback @ CABLCB
- * 2009: v1
-    * wasora
-    * colach
-    * mochin
-    * milonga
- * 2012: v2 (with optimization, it even had SIMAN & GA)
-    * wasora
-    * Fino
-    * milonga
-    * pywas
-    * relap/dynetz
- * 2021: v3 (UNIX & cloud)
-    * FeenoX
-     
- 
- 
- 
-  

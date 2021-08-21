@@ -17,14 +17,14 @@ set key top right
 # set title "Inverse point kinetic reactor equations with $\phi(t)$ given in a file"
 set output "inverse.pdf"
 
-plot "inverse-dae.dat"      u 1:(1e5*$3)  w l  lw 3 lt 2  color red   ti "DAEs",\
-     "inverse-integral.dat" u 1:(1e5*$2)  w l  lw 2 lt 3  color plum  ti "Integral"
+plot "inverse-dae.dat"      u 1:(1e5*$3)  w l  lw 3 lt 2 pt 1 color  red   ti "DAEs",\
+     "inverse-integral.dat" u 1:(1e5*$2)  w l  lw 2 lt 1 pt 17 color cyan  ti "Integral"
 
 set xrange [9.75:10.25]
 set yrange [9.5:10.1]
 set key bottom right
 set output "inverse-zoom.pdf"
 
-plot "inverse-dae.dat"      u 1:(1e5*$3)  w lp  lw 3 lt 2  color red   ti "DAEs",\
-     "inverse-integral.dat" u 1:(1e5*$2)  w lp  lw 2 lt 3  color plum  ti "Integral"
+plot "inverse-dae.dat"      u 1:(1e5*$3)  w lp  lw 3 lt 2 pt 1  color red   ti "DAEs",\
+     "inverse-integral.dat" u 1:(1e5*$2)  w lp  lw 2 lt 1 pt 17 color cyan  ti "Integral"
      
