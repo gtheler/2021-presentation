@@ -1,0 +1,77 @@
+# compute the first five natural modes of a cantilever wire
+# see https://www.seamplex.com/fino/doc/alambre.pdf (in spanish)
+# (note that there is a systematic error of a factor of two in the measured values)
+
+DEFAULT_ARGUMENT_VALUE 1 hex       # mesh, either hex or unstruct
+DEFAULT_ARGUMENT_VALUE 2 copper    # material, either copper or aluminum
+
+l = 0.5*303e-3   # cantilever wire length [ m ]
+d = 1.948e-3     # wire diameter [ m ]
+
+
+# material properties for copper
+m_copper = 0.5*8.02e-3  # total mass (half the measured because of the experimental disposition) [ kg ]
+E_copper = 2*66.2e9     # [ Pa ] Young modulus (twice because the factor-two error)
+
+# material properties for aluminum
+m_aluminum = 0.5*2.67e-3
+E_aluminum = 2*40.2e9
+
+# problem’s properties
+E = E_$2                     # [ MPa ]
+rho = m_$2/(pi*(0.5*d)^2*l)  # [ kg / m^3 ] density = mass (measured) / volume 
+nu = 0                       # Poisson’s ratio (does not appear in Euler-Bernoulli)
+
+# analytical solution
+VECTOR kl[5]
+VECTOR f_euler[5]
+VECTOR tmp[5]
+
+# first compute the first five roots ok cosh(kl)*cos(kl)+1 
+kl[i] = root(cosh(t)*cos(t)+1, t, 3*i-2,3*i+1)
+
+# then compute the frequencies according to Euler-Bernoulli
+# note that we need to use SI inside the square root
+A = pi * (d/2)^2
+I = pi/4 * (d/2)^4
+f_euler[i] = 1/(2*pi) * kl(i)^2 * sqrt((E * I)/(rho * A * l^4))
+tmp[i] = kl(i)^2
+
+# now compute the modes numerically with FEM
+# note that each mode is duplicated as it is degenerated
+READ_MESH wire-$1.msh DIMENSIONS 3
+PROBLEM modal MODES 10
+BC fixed fixed
+SOLVE_PROBLEM
+
+# compare the frequencies
+PRINT "  \$n\$ |   FEM  | Euler | Relative difference [%]"
+PRINT ":----:+:------:+:-----:+:-----------------------:"
+PRINT_VECTOR i         f(2*i-1) f_euler   100*(f_euler(i)-f(2*i-1))/f_euler(i)
+PRINT
+PRINT ": $2 wire over $1 mesh, frequencies in Hz"
+
+# PRINT
+# PRINT "\# mode    L              Gamma           mu              Mu"
+# PRINT "\# -------------------------------------------------------------------"
+# PRINT_VECTOR FORMAT "% .6g" i L Gamma mu Mu
+
+# write the modes into a vtk file
+WRITE_MESH wire-$1-$2.vtk \
+ VECTOR u1 v1 w1 VECTOR u2 v2 w2 VECTOR u3 v3 w3 \
+ VECTOR u4 v4 w4 VECTOR u5 v5 w5 VECTOR u6 v6 w6 \
+ VECTOR u7 v7 w7 VECTOR u8 v8 w8 VECTOR u9 v9 w9 VECTOR u10 v10 w10
+
+# and into a msh file
+WRITE_MESH wire-$1-$2.msh {
+ u1 v1 w1
+ u2 v2 w2
+ u3 v3 w3
+ u4 v4 w4
+ u5 v5 w5
+ u6 v6 w6
+ u7 v7 w7
+ u8 v8 w8
+ u9 v9 w9
+ u10 v10 w10
+}

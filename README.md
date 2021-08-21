@@ -1440,9 +1440,46 @@ done
 
 
 
-## Markdown table: natural oscillation frequencies
+## Markdown table: natural oscillation frequencies of a wire
 
-Alambre PDF
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+
+Experimental Physics 101 (2004)
+
+\centering ![](wire/alambre-3.png){width=70%}
+:::
+
+::: {.column width="60%"}
+
+```feenox
+# compare the frequencies
+PRINT "  \$n\$ |   FEM  | Euler | Relative difference [%]"
+PRINT ":----:+:------:+:-----:+:-----------------------:"
+PRINT_VECTOR i         f(2*i-1) f_euler   100*(f_euler(i)-f(2*i-1))/f_euler(i)
+PRINT
+PRINT ": $2 wire over $1 mesh, frequencies in Hz"
+```
+
+```terminal
+$ feenox wire.fee copper hex > copper-hex.md
+$
+```
+
+  $n$ |   FEM  | Euler | Relative difference [%]
+:----:+:------:+:-----:+:-----------------------:
+1     | 45.8374|45.8448|0.0161707
+2     | 287.126|287.302|0.0611787
+3     | 803.369|804.454|0.134888
+4     | 1572.59|1576.41|0.242324
+5     | 2595.99|2605.92|0.381107
+
+: copper wire over hex mesh, frequencies in Hz
+
+:::
+::::::::::::::
+
 
 ## Professional tables: environmentally-assisted fatigue
 
