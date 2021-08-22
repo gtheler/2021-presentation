@@ -195,8 +195,8 @@ a fictitious & imaginary "Request for Quotation" for a computational tool:
 
  * Application to industrial problems
    - Open source (to allow third-party V&V)
- * First basic version should some problems
- * It should be extensible to other problems & formulations 
+ * First version should handle some problems
+ * Extensible to other problems & formulations 
    - Free (as in freedom to hire somebody to modify/extend it)
 
 #### 1.1. Objective
@@ -247,7 +247,7 @@ a fictitious & imaginary "Request for Quotation" for a computational tool:
 
 #### 1.2. Scope
 
- * The problem should be defined progamatically
+ * The problem should be defined programatically
    - One or more input files (JSON, YAML, ad-hoc format), and/or
    - An API for high-level language (Python, Julia, etc.)
  * There is no need to _include_ a GUI
@@ -276,8 +276,8 @@ a fictitious & imaginary "Request for Quotation" for a computational tool:
        ![](transfer.svg){width=90%}\ 
    
  * English-like syntactic-sugared input files
-    - nouns are definitions
-    - verbs are instructions
+    - Nouns are definitions
+    - Verbs are instructions
  * Python & Julia API: \todolater
    - But already taken into account in the design & implementation
  * Separate mesher
@@ -326,6 +326,8 @@ $$
 
 \noindent and $\sigma=10$, $r=28$ and $b=8/3$.
 :::
+
+. . .
 
 ::: {.column width="55%"}
 ```{.feenox include="lorenz/lorenz.fee"}
@@ -441,7 +443,7 @@ $
     - Local desktop/laptops (not needed but suggested)
     - Windows and MacOS  (not needed but suggested)
     - Small cloud instances
- * Large actual problems should be split in several hosts
+ * Large actual problems should be split into several hosts
     - HPC clusters
     - Scalable cloud instances
  * Mobile devices (not needed but suggested)
@@ -577,7 +579,8 @@ $
 . . .
 
 ::: {.column width="50%"}
-\centering ![](maze3.png){height=8cm}\ 
+\onslide<1>{\begin{center}\includegraphics[height=8cm]{maze2.png}\end{center}}
+\onslide<2>{\begin{center}\includegraphics[height=8cm]{maze3.png}\end{center}}
 :::
 ::::::::::::::
 
@@ -847,7 +850,7 @@ $
  * Similar to to other tools in terms of
     - CPU/GPU
     - RAM
-    - storage
+    - Storage
 
 #### 2.4. Scalability
 
@@ -992,7 +995,7 @@ done
 \centering ![](thermal-slabs.pdf){width=75%}
 
  * FeenoX can tell that $k(T)$ is non-linear
-   - It switchs from `KSP` to `SNES`
+   - It switchs from [`KSP`](https://petsc.org/release/docs/manualpages/KSP/) to [`SNES`](https://petsc.org/release/docs/manualpages/SNES/index.html)
 
 :::
 
@@ -1095,6 +1098,8 @@ $$
 \noindent for $0 < t < 100$ starting from steady-steate conditions at full power.
 :::
 
+. . .
+
 ::: {.column width="55%"}
 ```{.feenox include="kinetics/reactivity-from-table.fee"}
 ```
@@ -1175,7 +1180,7 @@ $ feenox inverse-integral.fee flux.dat > inverse-integral.dat
    - GPLv3**+**: the '+' is for the future
  * Nice-to-haves: \todolater
    - Lagrangian elements, DG, $h$-$p$ AMR, ...
- * Other problems: \todolater
+ * Other problems & formulations: \todolater
    - Each PDE has an independent directory
    - "Virtual methods" as function pointers
    - Use Laplace as a template (elliptic)
