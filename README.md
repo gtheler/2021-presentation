@@ -576,11 +576,8 @@ $
 
 :::
 
-. . .
-
 ::: {.column width="50%"}
-\onslide<1>{\begin{center}\includegraphics[height=8cm]{maze2.png}\end{center}}
-\onslide<2>{\begin{center}\includegraphics[height=8cm]{maze3.png}\end{center}}
+\only<1>{\centering\includegraphics[height=8cm]{maze2.png}}\only<2>{\centering\includegraphics[height=8cm]{maze3.png}}
 :::
 ::::::::::::::
 
@@ -1339,12 +1336,12 @@ $
 
 
 
-## NAFEMS LE11: everything is an expression
+## NAFEMS LE11: everything is an expression (especially temperature)
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 
-\centering ![](nafems-le10.png){width=75%}
+\centering ![](nafems-le11.png){width=75%}
 
 :::
 
@@ -1354,24 +1351,25 @@ $
 
 ```{.feenox include="nafems-le11/nafems-le11.fee"}
 ```
-\ruleofpar{clarity}
+\ruleofpar{least surprise}
 
 ```terminal
-$ gmsh -3 -clscale 0.2 nafems-le11.geo
+$ gmsh -3 -clscale 0.5 nafems-le11.geo
 [...]
-Info    : Done meshing order 2 (Wall 0.520656s, CPU 0.508708s)
-Info    : 116572 nodes 18817 elements
+Info    : 8326 nodes 1849 elements
 Info    : Writing 'nafems-le11.msh'...
 $ feenox nafems-le11.fee 
-sigma_y @ D =  -5.38361 MPa
+sigma_z(A) =  -105.043 MPa
 $
 ```
-\ruleofpar{economy}
+
+ * [3D distributions in VTK](https://www.seamplex.com/feenox/videos/nafems-le11.vtk)
+
 :::
 ::::::::::::::
 
 
-\ruleofpar{least surprise}
+
 
 ## 
 

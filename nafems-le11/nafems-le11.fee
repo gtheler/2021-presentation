@@ -2,19 +2,19 @@ PROBLEM mechanical 3D
 READ_MESH nafems-le11.msh
 
 # linear temperature gradient in the radial and axial direction
-T(x,y,z) := sqrt(x^2 + y^2) + z
+T(x,y,z) := sqrt(x^2 + y^2) + z  # UTEMP for this????
 
-# Boundary conditions
-BC xz     v=0
-BC yz     u=0
-BC xy     w=0
-BC HIH'I' w=0
+BC xz     v=0       # displacement vector is [u,v,w]
+BC yz     u=0       # u = displacement in x
+BC xy     w=0       # v = displacement in y
+BC HIH'I' w=0       # w = displacement in z
 
-# material properties (isotropic & uniform so we can use scalar constants)
 E = 210e3*1e6       # mesh is in meters, so E=210e3 MPa -> Pa
 nu = 0.3            # dimensionless
 alpha = 2.3e-4      # in 1/ºC as in the problem
-
 SOLVE_PROBLEM
+
+# for post-processing in Paraview
 WRITE_MESH nafems-le11.vtk VECTOR u v w   T sigmax sigmay sigmaz
-PRINT "sigma_z(A) = " sigmaz(0,1,0)/1e6 "MPa"
+
+PRINT "sigma_z(A) = " sigmaz(0,1,0)/1e6 "MPa" SEP " "
