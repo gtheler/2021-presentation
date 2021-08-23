@@ -1341,6 +1341,36 @@ $
 
 ## NAFEMS LE11: everything is an expression
 
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+\centering ![](nafems-le10.png){width=75%}
+
+:::
+
+. . .
+
+::: {.column width="50%"}
+
+```{.feenox include="nafems-le11/nafems-le11.fee"}
+```
+\ruleofpar{clarity}
+
+```terminal
+$ gmsh -3 -clscale 0.2 nafems-le11.geo
+[...]
+Info    : Done meshing order 2 (Wall 0.520656s, CPU 0.508708s)
+Info    : 116572 nodes 18817 elements
+Info    : Writing 'nafems-le11.msh'...
+$ feenox nafems-le11.fee 
+sigma_y @ D =  -5.38361 MPa
+$
+```
+\ruleofpar{economy}
+:::
+::::::::::::::
+
+
 \ruleofpar{least surprise}
 
 ## 
