@@ -1,8 +1,8 @@
 ---
 aspectratio: 169
-author: Germán Theler
+author: Jeremy Theler
 colorlinks: true
-date: 5792d9c—2021-08-23+
+date: d4beae5—2021-08-23+
 email: jeremy@seamplex.com
 fonttheme: professionalfonts
 handout: false
@@ -21,36 +21,6 @@ title: |
 ---
 
 
-
-## Background 1/2
-
-≈ 15 years of updates!
-
--   2007 Fuzzy logic & chaotic natural convection loops @ IB
--   2008 Instabilities in the coupled neutronic-thermal-hydraulic
-    problem @ IB
--   2008 TECNA—CNA2
--   2009 First attempt at PhD—v1
--   2010 Paper on stability of point kinetics @ Nuc. Eng. & Design
--   2010 First presentation of milonga at AATN
--   2011 First ME with milonga (mrivero) @ UBA
--   2011 IMEF → milonga with FEM @ UBA
--   2012 Paper generalized boiling channel @ ENIEF
--   2013 Monograph milonga FEM vs. FVM @ UBA
--   2013 Paper unstructured grids for neutron diffusion
-
-## Background 2/2
-
--   2013 Doppler measurement @ CNA1—v2
--   2014 Design basis @ ENIEF
--   2014 Doppler measurement @ CNA2
--   2015 Workshop milonga @ CAC
--   2016 First PhD with milonga (vitor) @ Belo Horizonte
--   2017 Fatigue for LTE @ CNE
--   2018 Opportunity @ KAIST—second attempt at PhD
--   2020 Remote courses—third attempt at PhD
--   2021 FeenoX (v3)
--   2021 Simulation courses @ UNICEN
 
 ## How do we write papers/reports/documents?
 
