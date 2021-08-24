@@ -576,7 +576,7 @@ $
 :::
 
 ::: {.column width="50%"}
-\only<1>{\centering\includegraphics[height=8cm]{maze2.png}}\only<2>{\centering\includegraphics[height=8cm]{maze3.png}}
+\only<1 | handout:0>{\centering\includegraphics[height=8cm]{maze2.png}}\only<2>{\centering\includegraphics[height=8cm]{maze3.png}}
 :::
 ::::::::::::::
 
