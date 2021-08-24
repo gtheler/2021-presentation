@@ -582,7 +582,7 @@ $
 
  
 
-## The life on an influencer...
+## The life of an influencer...
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
