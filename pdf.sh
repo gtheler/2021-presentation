@@ -37,7 +37,7 @@ pandoc -s -f markdown+smart -t beamer+smart hash.yaml 2021-phd-slides.md -o 2021
   --pdf-engine=xelatex \
   --template=template.tex
   
-pandoc -s -f markdown+smart hash.yaml 2021-feenox.md -t gfm hash.yaml -o README.md \
+pandoc -s -f markdown+smart 2021-feenox.md -t gfm -o README.md \
   --lua-filter=include-code-files.lua \
   --lua-filter=code-style.lua
 

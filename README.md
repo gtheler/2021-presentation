@@ -2,7 +2,6 @@
 aspectratio: 169
 author: Jeremy Theler
 colorlinks: true
-date: a0111e3—2021-08-24+
 email: jeremy@seamplex.com
 fonttheme: professionalfonts
 innertheme: rectangles
