@@ -17,7 +17,6 @@ colorlinks: true
 sansfont: Carlito
 monofont: DejaVuSansMono
 header-includes: \include{syntax.tex}
-handout: false
 ...
 
 
@@ -415,7 +414,7 @@ $
     apt-get install lib-sundials-dev petsc-dev slepc-dev
     ```
 
- * Sources on Github
+ * Sources on [github.com/seamplex/feenox](https://github.com/seamplex/feenox)
  
     ```terminal
     git clone https://github.com/seamplex/feenox
@@ -539,7 +538,7 @@ $
 :::
 
 ::: {.column width="50%"}
-\centering ![](maze2.png){height=8cm}\ 
+\centering\includegraphics[height=8cm]{maze2.png}
 :::
 ::::::::::::::
 
@@ -588,7 +587,7 @@ $
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 
-\centering ![](maze-linkedin.png)
+\centering ![](maze-linkedin3.png){width=80%}
 
 :::
 
@@ -992,7 +991,7 @@ done
 \centering ![](thermal-slabs.pdf){width=75%}
 
  * FeenoX can tell that $k(T)$ is non-linear
-   - It switchs from [`KSP`](https://petsc.org/release/docs/manualpages/KSP/) to [`SNES`](https://petsc.org/release/docs/manualpages/SNES/index.html)
+   - It switchs from [`KSP`](https://petsc.org/release/docs/manual/ksp/) to [`SNES`](https://petsc.org/release/docs/manual/snes/)
 
 :::
 
@@ -1675,7 +1674,7 @@ $
    - Previously on Launchpad (`bzr`)
    - Previously on-premise (`svn`) 
  * <https://github.com/seamplex/feenox>
- * <https://seamplex.com/feenox> \todonow
+ * <https://seamplex.com/feenox>
  * Mailing list (Google group)
  * Build a community! \todolater
    - Code of conduct

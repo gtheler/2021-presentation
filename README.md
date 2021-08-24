@@ -2,10 +2,9 @@
 aspectratio: 169
 author: Jeremy Theler
 colorlinks: true
-date: d4beae5—2021-08-23+
+date: 3f9a737—2021-08-23+
 email: jeremy@seamplex.com
 fonttheme: professionalfonts
-handout: false
 innertheme: rectangles
 institute: |
   Mid-term evaluation, PhD in Nuclear Engineering  
@@ -369,7 +368,8 @@ $
     apt-get install lib-sundials-dev petsc-dev slepc-dev
     ```
 
--   Sources on Github
+-   Sources on
+    [github.com/seamplex/feenox](https://github.com/seamplex/feenox)
 
     ``` terminal
     git clone https://github.com/seamplex/feenox
@@ -496,8 +496,6 @@ $
 
 <div class="column" width="50%">
 
-<img src="maze2.png" style="height:8cm" /> 
-
 </div>
 
 </div>
@@ -555,7 +553,7 @@ $
 
 <div class="column" width="50%">
 
-![](maze-linkedin.png)
+<img src="maze-linkedin3.png" style="width:80.0%" />
 
 </div>
 
@@ -1070,8 +1068,8 @@ done
 
 -   FeenoX can tell that *k*(*T*) is non-linear
     -   It switchs from
-        [`KSP`](https://petsc.org/release/docs/manualpages/KSP/) to
-        [`SNES`](https://petsc.org/release/docs/manualpages/SNES/index.html)
+        [`KSP`](https://petsc.org/release/docs/manual/ksp/) to
+        [`SNES`](https://petsc.org/release/docs/manual/snes/)
 
 </div>
 
