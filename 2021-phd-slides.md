@@ -35,11 +35,11 @@ header-includes: \include{syntax.tex}
  * 2011 IMEF $\rightarrow$ milonga with FEM @ UBA 
  * 2012 Paper generalized boiling channel @ ENIEF
  * 2013 Monograph milonga FEM vs. FVM @ UBA
- * 2013 Paper unstructured grids for neutron diffusion
 
  
 ## Background 2/2
 
+ * 2013 Paper unstructured grids for neutron diffusion
  * 2013 Doppler measurement @ CNA1---v2
  * 2014 Design basis @ ENIEF
  * 2014 Doppler measurement @ CNA2
@@ -49,7 +49,6 @@ header-includes: \include{syntax.tex}
  * 2018 Opportunity @ KAIST---second attempt at PhD
  * 2020 Remote courses---third attempt at PhD
  * 2021 FeenoX (v3)
- * 2021 Simulation courses @ UNICEN
 
 
  
